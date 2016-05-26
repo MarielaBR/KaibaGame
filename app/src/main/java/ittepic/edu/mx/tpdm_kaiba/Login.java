@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -31,13 +32,7 @@ public class Login extends AppCompatActivity {
         usuario=(EditText)findViewById(R.id.editText);
         contrasena=(EditText)findViewById(R.id.editText2);
 
-        entrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(Login.this, MenuPrincipal.class );
-                startActivity(i);
-            }
-        });
+
         registro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,6 +60,11 @@ public class Login extends AppCompatActivity {
     }
 
     public void mostrarResultado(String resultado){
+
+    if(resultado.startsWith("encontrado")){
+        Intent i = new Intent(Login.this, MenuPrincipal.class );
+        startActivity(i);
+    }else{
         AlertDialog.Builder alerta= new AlertDialog.Builder(this);
 
         if(resultado.startsWith("Error_404_1")){
@@ -76,6 +76,9 @@ public class Login extends AppCompatActivity {
         if(resultado.startsWith("Error_404")){
             resultado="Al parecer no existe el PHP buscado";
         }
+        if(resultado.startsWith("no encontrado")){
+            resultado="Error usuario y/o contraseña incorrectos";
+        }
         alerta.setTitle("Respuesta desde SERVIDOR:")
                 .setMessage(resultado)
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -85,5 +88,5 @@ public class Login extends AppCompatActivity {
                     }
                 })
                 .show();
-    }
+    }}
 }

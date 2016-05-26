@@ -15,17 +15,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by Liz on 25/05/2016.
+ * Created by Liz on 26/05/2016.
  */
-
-
-
-
-public class Conexion extends AsyncTask<URL,String,String> {
+public class ConexionRegistro extends AsyncTask<URL,String,String> {
     List<String[]> variables;
-    Login puntero;
+    Registro puntero;
 
-    public Conexion(Login p){
+    public ConexionRegistro(Registro p){
         variables= new ArrayList<String[]>();
         puntero=p;
     }

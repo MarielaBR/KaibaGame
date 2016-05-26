@@ -28,5 +28,6 @@ public class Principal extends AppCompatActivity {
             }
         });
     }
-    //prueba1
+
+
 }

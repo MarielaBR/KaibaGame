@@ -55,7 +55,7 @@ public class Login extends AppCompatActivity {
                     web.agregarVariables("usuario",usuario.getText().toString());
                     web.agregarVariables("contrasena",contrasena.getText().toString());
 
-                    web.execute(new URL("kaiba.esy.es/login.php"));
+                    web.execute(new URL("http://kaiba.esy.es/login.php"));
                 }catch(MalformedURLException e){
                     AlertDialog.Builder  alerta= new AlertDialog.Builder(Login.this);
                     alerta.setTitle("ERROR").setMessage(e.getMessage()).show();

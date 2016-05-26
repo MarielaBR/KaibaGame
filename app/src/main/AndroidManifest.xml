@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".MenuPrincipal" android:screenOrientation="reverseLandscape"/>
-        <activity android:name=".Login" android:screenOrientation="reverseLandscape"/>
+        <activity android:name=".Login" android:screenOrientation="portrait"/>
         <activity android:name=".Registro" android:screenOrientation="portrait"/>
         <activity android:name=".Confirmacion" android:screenOrientation="portrait"></activity>
     </application>

@@ -37,7 +37,7 @@ public class Registro extends AppCompatActivity {
 
                 try{
                     ConexionRegistro web= new ConexionRegistro(Registro.this);
-                    web.agregarVariables("usuario",usuario.getText().toString());
+                    web.agregarVariables("gusuario",usuario.getText().toString());
                     web.agregarVariables("contrasena",contrasena.getText().toString());
                     web.agregarVariables("email",email.getText().toString());
                     web.agregarVariables("telefono",telefono.getText().toString());

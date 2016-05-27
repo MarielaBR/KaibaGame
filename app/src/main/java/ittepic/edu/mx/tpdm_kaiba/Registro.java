@@ -28,8 +28,8 @@ public class Registro extends AppCompatActivity {
         aceptar = (Button)findViewById(R.id.button3);
         usuario=(EditText)findViewById(R.id.editText3);
         contrasena=(EditText)findViewById(R.id.editText4);
-        email=(EditText)findViewById(R.id.editText5);
-        telefono=(EditText)findViewById(R.id.editText6);
+        email=(EditText)findViewById(R.id.editText6);
+        telefono=(EditText)findViewById(R.id.editText5);
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,7 +37,7 @@ public class Registro extends AppCompatActivity {
 
                 try{
                     ConexionRegistro web= new ConexionRegistro(Registro.this);
-                    web.agregarVariables("gusuario",usuario.getText().toString());
+                    web.agregarVariables("usuario",usuario.getText().toString());
                     web.agregarVariables("contrasena",contrasena.getText().toString());
                     web.agregarVariables("email",email.getText().toString());
                     web.agregarVariables("telefono",telefono.getText().toString());

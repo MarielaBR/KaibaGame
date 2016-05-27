@@ -53,7 +53,7 @@ public class Registro extends AppCompatActivity {
 
 
     }
-    
+
 
     public void mostrarResultado(String resultado){
 

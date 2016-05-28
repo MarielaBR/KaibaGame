@@ -22,7 +22,8 @@
         android:textColorHint="#999999"
         android:textColor="#FFFFFF"
         android:textAlignment="center"
-        android:drawableTop="@drawable/user"/>
+        android:drawableTop="@drawable/user"
+        android:singleLine="true"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -35,7 +36,9 @@
         android:inputType="textPassword"
         android:textColorHint="#999999"
         android:textColor="#FFFFFF"
-        android:drawableTop="@drawable/lock"/>
+        android:drawableTop="@drawable/lock"
+        android:singleLine="true"
+        />
 
     <ImageView
         android:layout_width="match_parent"

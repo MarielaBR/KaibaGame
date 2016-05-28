@@ -31,13 +31,7 @@
         <activity
             android:name=".Confirmacion"
             android:screenOrientation="portrait" />
-        <activity android:name=".Cola" />
         <activity android:name=".Partida" />
-        <activity android:name=".Amigos" />
-        <activity android:name=".BuscarAmigo" />
-        <activity android:name=".Mensajes" />
-        <activity android:name=".Conversacion" />
-        <activity android:name=".Puntuaciones"></activity>
     </application>
 
 </manifest>

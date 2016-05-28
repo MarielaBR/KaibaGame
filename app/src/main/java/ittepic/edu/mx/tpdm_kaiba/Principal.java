@@ -20,7 +20,7 @@ public class Principal extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
 
         img = (ImageView)findViewById(R.id.imageView2);
-
+        //cambio1
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

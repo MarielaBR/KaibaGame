@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,19 +7,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/fondologin2"
+    android:background="@drawable/fondologin"
+    android:orientation="vertical"
     tools:context="ittepic.edu.mx.tpdm_kaiba.Confirmacion">
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Aceptar"
-        android:id="@+id/button5"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
-
     <EditText
-        android:layout_width="wrap_content"
+        android:layout_marginTop="300dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/editText7"
         android:layout_centerVertical="true"
@@ -28,7 +22,17 @@
         android:textColorHint="#999999"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
+        android:inputType="number"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true" />
 
-</RelativeLayout>
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView6"
+        android:layout_below="@+id/editText7"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/aceptar"
+        android:layout_marginTop="85dp"/>
+
+</LinearLayout>

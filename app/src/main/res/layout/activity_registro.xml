@@ -30,7 +30,8 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#999999"
             android:drawableTop="@drawable/user"
-            android:textAlignment="center"/>
+            android:textAlignment="center"
+            android:singleLine="true"/>
 
         <EditText
             android:layout_width="match_parent"

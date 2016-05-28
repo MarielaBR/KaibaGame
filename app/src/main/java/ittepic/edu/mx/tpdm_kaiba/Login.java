@@ -10,14 +10,14 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.ImageView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Login extends AppCompatActivity {
-    Button entrar,registro;
     EditText usuario,contrasena;
+    ImageView img,reg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,13 +27,14 @@ public class Login extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
 
-        entrar = (Button)findViewById(R.id.button);
-        registro = (Button)findViewById(R.id.button4);
         usuario=(EditText)findViewById(R.id.editText);
         contrasena=(EditText)findViewById(R.id.editText2);
+        img = (ImageView)findViewById(R.id.imageView3);
+        reg =(ImageView)findViewById(R.id.imageView4);
 
 
-        registro.setOnClickListener(new View.OnClickListener() {
+
+        reg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(Login.this, Registro.class);
@@ -42,17 +43,17 @@ public class Login extends AppCompatActivity {
         });
 
 
-        entrar.setOnClickListener(new View.OnClickListener() {
+        img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try{
-                    Conexion web= new Conexion(Login.this);
-                    web.agregarVariables("usuario",usuario.getText().toString());
-                    web.agregarVariables("contrasena",contrasena.getText().toString());
+                try {
+                    Conexion web = new Conexion(Login.this);
+                    web.agregarVariables("usuario", usuario.getText().toString());
+                    web.agregarVariables("contrasena", contrasena.getText().toString());
 
                     web.execute(new URL("http://kaiba.esy.es/login.php"));
-                }catch(MalformedURLException e){
-                    AlertDialog.Builder  alerta= new AlertDialog.Builder(Login.this);
+                } catch (MalformedURLException e) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
                     alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
                 }
             }

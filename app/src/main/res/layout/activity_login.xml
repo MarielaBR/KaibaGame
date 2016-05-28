@@ -9,45 +9,46 @@
     android:paddingTop="300dp"
     android:background="@drawable/fondologin"
     android:orientation="vertical"
-    tools:context="ittepic.edu.mx.tpdm_kaiba.Login">
+    tools:context="ittepic.edu.mx.tpdm_kaiba.Login"
+    android:weightSum="1">
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/usertext"
+        android:background="@drawable/textf"
         android:id="@+id/editText"
         android:layout_marginBottom="20dp"
-        android:paddingLeft="68dp"
         android:hint="Usuario"
         android:textColorHint="#999999"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:textAlignment="center"
+        android:drawableTop="@drawable/user"/>
 
     <EditText
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/passtext"
+        android:background="@drawable/textf"
         android:id="@+id/editText2"
         android:layout_marginBottom="68dp"
-        android:paddingLeft="50dp"
         android:hint="Contraseña"
+        android:textAlignment="center"
+        android:inputType="textPassword"
         android:textColorHint="#999999"
-        android:textColor="#FFFFFF"/>
+        android:textColor="#FFFFFF"
+        android:drawableTop="@drawable/lock"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingresar"
-        android:id="@+id/button"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="38dp" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="23dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/loggear"
+        android:textAlignment="center"
+        android:layout_marginBottom="20dp"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Registrate"
-        android:id="@+id/button4"
-        android:layout_alignBottom="@+id/button"
-        android:layout_alignParentEnd="true" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="18dp"
+        android:id="@+id/imageView4"
+        android:src="@drawable/reg" />
 
 </LinearLayout>

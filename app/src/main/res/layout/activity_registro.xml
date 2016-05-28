@@ -7,47 +7,79 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@drawable/fondologin"
     tools:context="ittepic.edu.mx.tpdm_kaiba.Registro">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/editText3"
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        android:layout_alignParentStart="true">
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:id="@+id/editText4"
-        android:layout_below="@+id/editText3"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp"
-        android:layout_alignParentEnd="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/editText3"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="270dp"
+            android:background="@drawable/textf"
+            android:hint="Usuario"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#999999"
+            android:drawableTop="@drawable/user"
+            android:textAlignment="center"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="textEmailAddress"
-        android:ems="10"
-        android:id="@+id/editText5"
-        android:layout_centerVertical="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:ems="10"
+            android:id="@+id/editText4"
+            android:layout_below="@+id/editText3"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/textf"
+            android:textAlignment="center"
+            android:hint="Contraseña"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#999999"/>
 
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:inputType="phone"
-        android:ems="10"
-        android:id="@+id/editText6"
-        android:layout_below="@+id/editText5"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="31dp"
-        android:layout_alignParentEnd="true" />
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:ems="10"
+            android:id="@+id/editText5"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="25dp"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/textf"
+            android:textAlignment="center"
+            android:hint="E-Mail"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#999999"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="phone"
+            android:ems="10"
+            android:id="@+id/editText6"
+            android:layout_below="@+id/editText5"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="25dp"
+            android:background="@drawable/textf"
+            android:textAlignment="center"
+            android:hint="Número Telefónico"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#999999"/>
+    </LinearLayout>
 
     <Button
         android:layout_width="wrap_content"

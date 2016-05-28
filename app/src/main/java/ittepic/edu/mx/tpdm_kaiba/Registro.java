@@ -29,26 +29,97 @@ public class Registro extends AppCompatActivity {
         aceptar = (ImageView)findViewById(R.id.imageView5);
         usuario=(EditText)findViewById(R.id.editText3);
         contrasena=(EditText)findViewById(R.id.editText4);
-        email=(EditText)findViewById(R.id.editText6);
-        telefono=(EditText)findViewById(R.id.editText5);
+        email=(EditText)findViewById(R.id.editText5);
+        telefono=(EditText)findViewById(R.id.editText6);
 
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!telefono.getText().toString().equals("") && !usuario.getText().toString().equals("") && !contrasena.getText().toString().equals("")&& !email.getText().toString().equals("")){
+                    if(telefono.getText().toString().matches("[0-9]*") && telefono.getText().toString().length()==10) {
+                        if(email.getText().toString().matches(("^[\\w-]+(\\.[\\w-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")) && email.getText().length()<100) {
+                            if(usuario.getText().toString().matches("[A-Za-z0-9]*") && usuario.getText().toString().length()<=20){
+                                if(contrasena.getText().toString().length()<=20) {
+                                    try {
+                                        ConexionRegistro web = new ConexionRegistro(Registro.this);
+                                        web.agregarVariables("usuario", usuario.getText().toString());
+                                        web.agregarVariables("contrasena", contrasena.getText().toString());
+                                        web.agregarVariables("email", email.getText().toString());
+                                        web.agregarVariables("telefono", telefono.getText().toString());
+                                        web.execute(new URL("http://kaiba.esy.es/buscarinsertarusuario.php"));
 
-                try{
-                    ConexionRegistro web= new ConexionRegistro(Registro.this);
-                    web.agregarVariables("usuario",usuario.getText().toString());
-                    web.agregarVariables("contrasena",contrasena.getText().toString());
-                    web.agregarVariables("email",email.getText().toString());
-                    web.agregarVariables("telefono",telefono.getText().toString());
-                    web.execute(new URL("http://kaiba.esy.es/buscarinsertarusuario.php"));
+                                    } catch (MalformedURLException e) {
+                                        AlertDialog.Builder alerta = new AlertDialog.Builder(Registro.this);
+                                        alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                                    }
+                                }
+                                else{
+                                    AlertDialog.Builder alerta= new AlertDialog.Builder(Registro.this);
+                                    alerta.setTitle("Error")
+                                            .setMessage("Contraseña menor a 20 caracteres")
+                                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                                @Override
+                                                public void onClick(DialogInterface dialog, int which) {
+                                                    dialog.dismiss();
+                                                }
+                                            })
+                                            .show();
+                                }
+                        }else
+                        {
+                            AlertDialog.Builder alerta= new AlertDialog.Builder(Registro.this);
+                            alerta.setTitle("Error")
+                                    .setMessage("Formato de Usuario inválido, solo números y letras, máximo 20 caracteres")
+                                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .show();
+                        }
 
-                }catch(MalformedURLException e){
-                    AlertDialog.Builder  alerta= new AlertDialog.Builder(Registro.this);
-                    alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                    }
+                    else {
+                        AlertDialog.Builder alerta= new AlertDialog.Builder(Registro.this);
+                        alerta.setTitle("Error")
+                                .setMessage("Formato de email inválido")
+                                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        dialog.dismiss();
+                                    }
+                                })
+                                .show();
+                    }
+                }
+                else{
+                    AlertDialog.Builder alerta= new AlertDialog.Builder(Registro.this);
+                    alerta.setTitle("Error")
+                            .setMessage("Número de teléfono inválido")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+
                 }
 
+            }
+                else{
+                    AlertDialog.Builder alerta= new AlertDialog.Builder(Registro.this);
+                    alerta.setTitle("Error")
+                            .setMessage("Rellene todos los campos")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
+                }
             }
         });
 
@@ -80,7 +151,13 @@ public class Registro extends AppCompatActivity {
             if(resultado.startsWith("EXISTE")){
                 resultado="USUARIO EXISTENTE ESCRIBA OTRO NOMBRE DE USUARIO DIFERENTE";
             }
-            alerta.setTitle("Respuesta desde SERVIDOR:")
+            if(resultado.startsWith("CORREO DUPLICADO")){
+                resultado="YA EXISTE UNA CUENTA CON ESE CORREO ELECTRÓNICO";
+            }
+            if(resultado.startsWith("TELEFONO DUPLICADO")){
+                resultado="YA EXISTE UNA CUENTA CON ESE NUMERO DE TELÈFONO";
+            }
+            alerta.setTitle("Alerta")
                     .setMessage(resultado)
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override

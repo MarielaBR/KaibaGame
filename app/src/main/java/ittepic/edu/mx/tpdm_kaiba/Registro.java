@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
+import android.widget.ImageView;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -15,8 +15,9 @@ import android.widget.Toast;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 public class Registro extends AppCompatActivity {
-    Button aceptar,registro;
+    ImageView aceptar;
     EditText usuario,contrasena,email,telefono;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,7 @@ public class Registro extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_registro);
 
-        aceptar = (Button)findViewById(R.id.button3);
+        aceptar = (ImageView)findViewById(R.id.imageView5);
         usuario=(EditText)findViewById(R.id.editText3);
         contrasena=(EditText)findViewById(R.id.editText4);
         email=(EditText)findViewById(R.id.editText6);

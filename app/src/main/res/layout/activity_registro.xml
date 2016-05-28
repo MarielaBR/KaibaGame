@@ -82,14 +82,15 @@
             android:textColor="#FFFFFF"
             android:textColorHint="#999999"
             android:drawableTop="@drawable/phone"/>
+
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Aceptar"
-        android:id="@+id/button3"
+        android:id="@+id/imageView5"
+        android:src="@drawable/aceptar"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

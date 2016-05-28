@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@drawable/fondologin"
+    android:background="@drawable/fondologin2"
     tools:context="ittepic.edu.mx.tpdm_kaiba.Registro">
 
     <LinearLayout
@@ -24,7 +24,7 @@
             android:layout_alignParentTop="true"
             android:layout_alignParentStart="true"
             android:layout_alignParentEnd="true"
-            android:layout_marginTop="270dp"
+            android:layout_marginTop="190dp"
             android:background="@drawable/textf"
             android:hint="Usuario"
             android:textColor="#FFFFFF"
@@ -46,6 +46,7 @@
             android:textAlignment="center"
             android:hint="Contraseña"
             android:textColor="#FFFFFF"
+            android:drawableTop="@drawable/lock"
             android:textColorHint="#999999"/>
 
         <EditText
@@ -62,6 +63,7 @@
             android:textAlignment="center"
             android:hint="E-Mail"
             android:textColor="#FFFFFF"
+            android:drawableTop="@drawable/at"
             android:textColorHint="#999999"/>
 
         <EditText
@@ -78,7 +80,8 @@
             android:textAlignment="center"
             android:hint="Número Telefónico"
             android:textColor="#FFFFFF"
-            android:textColorHint="#999999"/>
+            android:textColorHint="#999999"
+            android:drawableTop="@drawable/phone"/>
     </LinearLayout>
 
     <Button

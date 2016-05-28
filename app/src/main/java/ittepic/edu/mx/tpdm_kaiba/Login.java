@@ -46,15 +46,28 @@ public class Login extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    Conexion web = new Conexion(Login.this);
-                    web.agregarVariables("usuario", usuario.getText().toString());
-                    web.agregarVariables("contrasena", contrasena.getText().toString());
+                if (!usuario.getText().toString().equals("") && !contrasena.getText().toString().equals("")) {
+                    try {
+                        Conexion web = new Conexion(Login.this);
+                        web.agregarVariables("usuario", usuario.getText().toString());
+                        web.agregarVariables("contrasena", contrasena.getText().toString());
 
-                    web.execute(new URL("http://kaiba.esy.es/login.php"));
-                } catch (MalformedURLException e) {
-                    AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
-                    alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                        web.execute(new URL("http://kaiba.esy.es/login.php"));
+                    } catch (MalformedURLException e) {
+                        AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
+                        alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                    }
+                }else{
+                    AlertDialog.Builder alerta= new AlertDialog.Builder(Login.this);
+                    alerta.setTitle("ERROR")
+                            .setMessage("Llenar todos los campos")
+                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+                                    dialog.dismiss();
+                                }
+                            })
+                            .show();
                 }
             }
         });
@@ -80,7 +93,7 @@ public class Login extends AppCompatActivity {
         if(resultado.startsWith("no encontrado")){
             resultado="Error usuario y/o contraseña incorrectos";
         }
-        alerta.setTitle("Respuesta desde SERVIDOR:")
+        alerta.setTitle("Atención")
                 .setMessage(resultado)
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override

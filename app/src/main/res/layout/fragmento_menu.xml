@@ -5,11 +5,12 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView6"
-        android:src="@drawable/kaibap"
-        android:layout_marginLeft="5dp"/>
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="8dp"
+        android:src="@drawable/kaibap" />
 
     <ImageView
         android:layout_width="50dp"

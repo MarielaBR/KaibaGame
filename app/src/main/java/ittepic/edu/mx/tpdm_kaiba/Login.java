@@ -76,7 +76,7 @@ public class Login extends AppCompatActivity {
 
     public void onDestroy(){
         super.onDestroy();
-        finish();
+        System.exit(0);
 
     }
 

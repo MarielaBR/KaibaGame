@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
@@ -17,7 +16,7 @@
         android:src="@drawable/p1g"
         android:layout_below="@+id/imageView15"
         android:layout_toStartOf="@+id/imageView15"
-        android:layout_marginTop="34dp" />
+        android:layout_marginTop="35dp" />
 
     <ImageView
         android:layout_width="120dp"
@@ -42,4 +41,40 @@
         android:src="@drawable/personaje"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView16"
+        android:src="@drawable/n1e"
+        android:layout_below="@+id/imageView13"
+        android:layout_alignStart="@+id/imageView12"
+        android:layout_alignEnd="@+id/imageView12" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView17"
+        android:src="@drawable/n2"
+        android:layout_below="@+id/imageView13"
+        android:layout_alignStart="@+id/imageView13"
+        android:layout_alignEnd="@+id/imageView13" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView18"
+        android:src="@drawable/n3e"
+        android:layout_alignTop="@+id/imageView17"
+        android:layout_alignStart="@+id/imageView14"
+        android:layout_alignEnd="@+id/imageView14" />
+
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView19"
+        android:src="@drawable/aceptar"
+        android:layout_alignParentBottom="true"
+        android:layout_alignEnd="@+id/imageView17"
+        android:layout_below="@+id/imageView17" />
 </RelativeLayout>

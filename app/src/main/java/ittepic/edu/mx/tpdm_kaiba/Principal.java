@@ -1,6 +1,11 @@
 package ittepic.edu.mx.tpdm_kaiba;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
@@ -15,6 +20,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 public class Principal extends AppCompatActivity {
 
@@ -24,14 +30,15 @@ public class Principal extends AppCompatActivity {
     Bitmap fondo,mini,desliza;
     Matrix matrix;
     Boolean band1;
-
+    ConexionBD bd;
+    String user,pass,status;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_principal);
-
+        bd = new ConexionBD(this,"kaiba",null,1);
         lienzo= new CCanvas(this);
         setContentView(lienzo);
         matrix = new Matrix();
@@ -92,14 +99,58 @@ public class Principal extends AppCompatActivity {
 
         public boolean onTouchEvent(MotionEvent e){
             if(e.getAction() == MotionEvent.ACTION_DOWN){
-                Intent i = new Intent(Principal.this, Login.class);
-                startActivity(i);
-                Principal.this.finish();
+                consulta();
+                if(status.equals("1")) {
+                    Intent i = new Intent(Principal.this, MenuPrincipal.class);
+                    startActivity(i);
+                    Principal.this.finish();
+                }
+                else{
+                    Intent i = new Intent(Principal.this, Login.class);
+                    startActivity(i);
+                    Principal.this.finish();
+                }
             }
             return true;
         }
 
     }
+
+
+
+    public void consulta(){
+        try{
+            SQLiteDatabase base = bd.getReadableDatabase();
+            String sql = "SELECT * FROM USUARIO";
+            Cursor res = base.rawQuery(sql, null);
+            if(res.moveToFirst()){
+                user=res.getString(0);
+                pass=res.getString(1);
+                status=res.getString(2);
+            }else{
+                user="";
+                pass="";
+                status="";
+            }
+            base.close();
+
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(this).setMessage("Consulta erronea: "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+        }
+    }
+
+
+
+
+
+
 
     public void fond(){
         timer2=new CountDownTimer(5000,100) {
@@ -115,9 +166,17 @@ public class Principal extends AppCompatActivity {
             }
             @Override
             public void onFinish() {
-                Intent i = new Intent(Principal.this, Login.class);
-                startActivity(i);
-                Principal.this.finish();
+                consulta();
+                if(status.equals("1")) {
+                    Intent i = new Intent(Principal.this, MenuPrincipal.class);
+                    startActivity(i);
+                    Principal.this.finish();
+                }
+                else{
+                    Intent i = new Intent(Principal.this, Login.class);
+                    startActivity(i);
+                    Principal.this.finish();
+                }
             }
         };
         timer2.start();

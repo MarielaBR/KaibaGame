@@ -74,6 +74,12 @@ public class Login extends AppCompatActivity {
         });
     }
 
+    public void onDestroy(){
+        super.onDestroy();
+        finish();
+
+    }
+
     public void mostrarResultado(String resultado){
 
     if(resultado.startsWith("encontrado")){

@@ -1,14 +1,21 @@
 package ittepic.edu.mx.tpdm_kaiba;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.database.Cursor;
 import android.view.WindowManager;
 
 public class Seleccion extends AppCompatActivity {
     ImageView p1,p2,p3,t1,t2,t3,aceptar;
+    ConexionBD base;
+    String usu;
     int p;
 
     @Override
@@ -18,6 +25,7 @@ public class Seleccion extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_seleccion);
 
+        base = new ConexionBD(this,"kaiba",null,1);
         p1 = (ImageView)findViewById(R.id.imageView12);
         p2 = (ImageView)findViewById(R.id.imageView13);
         p3 = (ImageView)findViewById(R.id.imageView14);
@@ -74,9 +82,34 @@ public class Seleccion extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                consultarusuario();
+                System.out.println(usu);
             }
         });
 
+    }
+
+    public void consultarusuario(){
+        try{
+            SQLiteDatabase bd = base.getReadableDatabase();
+            String sql = "SELECT USUARIO FROM USUARIO ";
+            Cursor res = bd.rawQuery(sql, null);
+            if(res.moveToFirst()){
+                usu = res.getString(0);
+                bd.close();
+            }else{
+                bd.close();
+            }
+
+
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(this).setMessage("Consulta erronea: "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
     }
 }

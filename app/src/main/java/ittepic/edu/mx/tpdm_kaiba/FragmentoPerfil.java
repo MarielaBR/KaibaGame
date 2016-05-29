@@ -18,13 +18,34 @@ import android.widget.Toast;
  */
 public class FragmentoPerfil extends Fragment{
     View root;
+    TextView puntos,usuario,nivel,tvictorias,tderrotas,victorias,derrotas;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_perfil, container, false);
 
-        TextView text1 = (TextView)root.findViewById(R.id.textView8);
-        Typeface titulo = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
-        text1.setTypeface(titulo);
+        puntos = (TextView)root.findViewById(R.id.textView8);
+        Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+        puntos.setTypeface(normal);
+
+        usuario = (TextView)root.findViewById(R.id.textView);
+        Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams_BoldItalic.ttf");
+        puntos.setTypeface(ncursiva);
+
+        nivel = (TextView)root.findViewById(R.id.textView9);
+        nivel.setTypeface(normal);
+
+        tvictorias = (TextView)root.findViewById(R.id.textView10);
+        Typeface negrita = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams_Bold.ttf");
+        puntos.setTypeface(negrita);
+
+        tderrotas = (TextView)root.findViewById(R.id.textView11);
+        puntos.setTypeface(negrita);
+
+        victorias = (TextView)root.findViewById(R.id.textView12);
+        puntos.setTypeface(normal);
+
+        derrotas = (TextView)root.findViewById(R.id.textView13);
+        puntos.setTypeface(normal);
 
 
         return root;

@@ -13,7 +13,7 @@ public class FragmentoPuntuaciones extends Fragment{
     View root;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        root = inflater.inflate(R.layout.fragmento_mensajes, container, false);
+        root = inflater.inflate(R.layout.fragmento_puntuaciones, container, false);
 
         return root;
 

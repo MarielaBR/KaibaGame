@@ -2,6 +2,8 @@ package ittepic.edu.mx.tpdm_kaiba;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +13,7 @@ import android.widget.Button;
 import android.content.Intent;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -18,14 +21,15 @@ import java.net.URL;
 public class Login extends AppCompatActivity {
     EditText usuario,contrasena;
     ImageView img,reg;
-
+    ConexionBD base;
+    String usu,cont;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_login);
-
+        base = new ConexionBD(this,"kaiba",null,1);
 
         usuario=(EditText)findViewById(R.id.editText);
         contrasena=(EditText)findViewById(R.id.editText2);
@@ -46,6 +50,8 @@ public class Login extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                usu=usuario.getText().toString();
+                cont=contrasena.getText().toString();
                 if (!usuario.getText().toString().equals("") && !contrasena.getText().toString().equals("")) {
 
                     try {
@@ -80,9 +86,31 @@ public class Login extends AppCompatActivity {
 
     }
 
+
+
+    public void insertar(String us,String con){
+        try{
+            SQLiteDatabase bd = base.getWritableDatabase();
+            String sql = "INSERT INTO USUARIO VALUES('"+us+"','"+con+"','"+"1')";
+            bd.execSQL(sql);
+            //Toast.makeText(Login.this, "usuario y contraseña recordados", Toast.LENGTH_SHORT).show();
+            bd.close();
+
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(this).setMessage("Inserción erronea: "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
+    }
+
     public void mostrarResultado(String resultado){
 
     if(resultado.startsWith("encontrado")){
+        insertar(usu,cont);
         Intent i = new Intent(Login.this, Seleccion.class );
         startActivity(i);
     }else{

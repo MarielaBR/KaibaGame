@@ -5,16 +5,15 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 /**
  * Created by MARIELA on 28/05/2016.
  */
-public class FragmentoPerfil extends Fragment{
+public class FragmentoPuntuaciones extends Fragment{
     View root;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
-        root = inflater.inflate(R.layout.fragmento_perfil, container, false);
+        root = inflater.inflate(R.layout.fragmento_mensajes, container, false);
 
         return root;
 

@@ -148,17 +148,8 @@ public class Registro extends AppCompatActivity {
 
         if(resultado.startsWith("EXITO")){
             //Toast.makeText(this,"cuenta creada correctamente",Toast.LENGTH_LONG).show();
-            AlertDialog.Builder alerta= new AlertDialog.Builder(this);
-            alerta.setTitle("Mensaje Enviado")
 
-                    .setMessage("Se ha enviado un mensaje con el número de confirmación")
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
+            Toast.makeText(Registro.this, "Se ha enviado un mensaje con el número de confirmación", Toast.LENGTH_LONG).show();
             mensajesSMS();
 
             Intent i = new Intent(Registro.this, Confirmacion.class );

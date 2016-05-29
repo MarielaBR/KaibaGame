@@ -4,11 +4,13 @@ import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 /**
@@ -19,6 +21,11 @@ public class FragmentoPerfil extends Fragment{
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_perfil, container, false);
+
+        TextView text1 = (TextView)root.findViewById(R.id.textView8);
+        Typeface titulo = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+        text1.setTypeface(titulo);
+
 
         return root;
 

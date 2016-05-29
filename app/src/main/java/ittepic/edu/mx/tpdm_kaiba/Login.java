@@ -47,6 +47,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!usuario.getText().toString().equals("") && !contrasena.getText().toString().equals("")) {
+
                     try {
                         Conexion web = new Conexion(Login.this);
                         web.agregarVariables("usuario", usuario.getText().toString());
@@ -93,7 +94,7 @@ public class Login extends AppCompatActivity {
         if(resultado.startsWith("no encontrado")){
             resultado="Error usuario y/o contraseña incorrectos";
         }
-        alerta.setTitle("Atención")
+        alerta.setTitle("Alerta")
                 .setMessage(resultado)
                 .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override

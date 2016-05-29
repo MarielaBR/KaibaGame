@@ -11,6 +11,9 @@ import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 public class Confirmacion extends AppCompatActivity {
     ImageView aceptar;
     String codigo,usuario;
@@ -22,7 +25,7 @@ public class Confirmacion extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.activity_confirmacion);
-        codigo = getIntent().getStringExtra("codigo");
+        //codigo = getIntent().getStringExtra("codigo");
         usuario=getIntent().getStringExtra("usuario");
         aceptar = (ImageView)findViewById(R.id.imageView6);
         campocodigo=(EditText)findViewById(R.id.editText7);
@@ -30,23 +33,19 @@ public class Confirmacion extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(campocodigo.getText().toString().equals(codigo)){
-                    Intent i = new Intent(Confirmacion.this, Login.class);
-                    startActivity(i);
-                }
-                else{
-                    AlertDialog.Builder alerta= new AlertDialog.Builder(Confirmacion.this);
-                    alerta.setTitle("ERROR")
 
-                            .setMessage("Código Incorrecto, vuelva a ingresar el código de confirmación")
-                            .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
-                                    dialog.dismiss();
-                                }
-                            })
-                            .show();
+                try {
+
+                    ConexionConfirmacion web = new ConexionConfirmacion(Confirmacion.this);
+                    web.agregarVariables("usuario", usuario);
+                    web.agregarVariables("contrasena",campocodigo.getText().toString() );
+                    web.execute(new URL("http://kaiba.esy.es/confirmacion.php"));
+
+                } catch (MalformedURLException e) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(Confirmacion.this);
+                    alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
                 }
+
             }
         });
     }
@@ -56,7 +55,17 @@ public class Confirmacion extends AppCompatActivity {
 
 
     public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(Confirmacion.this);
+        alerta.setTitle("ERROR")
 
+                .setMessage("Código Incorrecto, vuelva a ingresar el código de confirmación")
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .show();
         }
 
 

@@ -2,6 +2,7 @@ package ittepic.edu.mx.tpdm_kaiba;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
@@ -50,8 +51,8 @@ public class Login extends AppCompatActivity {
         img.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                usu=usuario.getText().toString();
-                cont=contrasena.getText().toString();
+                usu = usuario.getText().toString();
+                cont = contrasena.getText().toString();
                 if (!usuario.getText().toString().equals("") && !contrasena.getText().toString().equals("")) {
 
                     try {
@@ -64,8 +65,8 @@ public class Login extends AppCompatActivity {
                         AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
                         alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
                     }
-                }else{
-                    AlertDialog.Builder alerta= new AlertDialog.Builder(Login.this);
+                } else {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(Login.this);
                     alerta.setTitle("ERROR")
                             .setMessage("Llenar todos los campos")
                             .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
@@ -86,16 +87,56 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public String consultarusuario(){
+        try{
+            String aux;
+            SQLiteDatabase bd = base.getReadableDatabase();
+            String sql = "SELECT USUARIO FROM USUARIO";
+            Cursor res = bd.rawQuery(sql, null);
+            if(res.moveToLast()){
+                aux=res.getString(0);
+                bd.close();
+                return aux;
+
+            }else{
+                bd.close();
+                return "no se encontro";
+            }
 
 
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(this).setMessage("Consulta erronea: "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+
+            return "";
+        }
+    }
     public void insertar(String us,String con){
         try{
-            SQLiteDatabase bd = base.getWritableDatabase();
-            String sql = "INSERT INTO USUARIO VALUES('"+us+"','"+con+"','"+"1')";
-            bd.execSQL(sql);
-            //Toast.makeText(Login.this, "usuario y contraseña recordados", Toast.LENGTH_SHORT).show();
-            bd.close();
 
+            if(consultarusuario().equals(usu)){
+                SQLiteDatabase bd = base.getWritableDatabase();
+                String sql2 = "DELETE FROM USUARIO";
+                bd.execSQL(sql2);
+                bd.close();
+            }
+            else{
+                SQLiteDatabase bd = base.getWritableDatabase();
+                String sql2 = "DELETE FROM USUARIO";
+                bd.execSQL(sql2);
+                bd.close();
+            }
+
+            SQLiteDatabase bd = base.getWritableDatabase();
+            String sql = "INSERT INTO USUARIO VALUES('" + us + "','" + con + "','" + "1')";
+            bd.execSQL(sql);
+
+            bd.close();
         }catch(SQLiteException sqle){
             new AlertDialog.Builder(this).setMessage("Inserción erronea: "+sqle.getMessage()).setTitle("ERROR").
                     setPositiveButton("OK", new DialogInterface.OnClickListener() {
@@ -110,9 +151,17 @@ public class Login extends AppCompatActivity {
     public void mostrarResultado(String resultado){
 
     if(resultado.startsWith("encontrado")){
-        insertar(usu,cont);
-        Intent i = new Intent(Login.this, Seleccion.class );
-        startActivity(i);
+        if(resultado.startsWith("encontradocrear")){
+            insertar(usu,cont);
+            Intent i = new Intent(Login.this, Seleccion.class );
+            startActivity(i);
+        }
+        else{
+            insertar(usu,cont);
+            Intent i = new Intent(Login.this, MenuPrincipal.class );
+            startActivity(i);
+        }
+
     }else{
         AlertDialog.Builder alerta= new AlertDialog.Builder(this);
 

@@ -2,6 +2,7 @@ package ittepic.edu.mx.tpdm_kaiba;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,10 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.database.Cursor;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Seleccion extends AppCompatActivity {
     ImageView p1,p2,p3,t1,t2,t3,aceptar;
@@ -83,7 +88,19 @@ public class Seleccion extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 consultarusuario();
-                System.out.println(usu);
+
+
+                try {
+
+                    ConexionSeleccion web = new ConexionSeleccion(Seleccion.this);
+                    web.agregarVariables("usuario", usu);
+                    web.agregarVariables("personaje",p+"");
+                    web.execute(new URL("http://kaiba.esy.es/insertarpersonaje.php"));
+
+                } catch (MalformedURLException e) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(Seleccion.this);
+                    alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                }
             }
         });
 
@@ -110,6 +127,36 @@ public class Seleccion extends AppCompatActivity {
                             dialog.dismiss();
                         }
                     }).show();
+        }
+    }
+
+    public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(Seleccion.this);
+
+
+        if(resultado.startsWith("EXITO")){
+            Toast.makeText(Seleccion.this, "Personaje elegido con éxito", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(Seleccion.this,MenuPrincipal.class );
+            startActivity(i);
+        }
+        else{
+            if(resultado.startsWith("ERROR2")){
+                resultado="Error al enviar el codigo";
+            }
+
+            if(resultado.startsWith("INCORRECTO")){
+                resultado="Código incorrecto, vuelva a intentarlo";
+            }
+
+            alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
         }
     }
 }

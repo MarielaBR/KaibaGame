@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class ConexionSeleccion  extends AsyncTask<URL,String,String> {
     List<String[]> variables;
-    Registro puntero;
+    Seleccion puntero;
 
-    public ConexionSeleccion(Registro p){
+    public ConexionSeleccion(Seleccion p){
         variables= new ArrayList<String[]>();
         puntero=p;
     }

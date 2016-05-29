@@ -1,14 +1,26 @@
 package ittepic.edu.mx.tpdm_kaiba;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
+import android.database.Cursor;
 import android.view.WindowManager;
+import android.widget.Toast;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class Seleccion extends AppCompatActivity {
     ImageView p1,p2,p3,t1,t2,t3,aceptar;
+    ConexionBD base;
+    String usu;
     int p;
 
     @Override
@@ -18,6 +30,7 @@ public class Seleccion extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_seleccion);
 
+        base = new ConexionBD(this,"kaiba",null,1);
         p1 = (ImageView)findViewById(R.id.imageView12);
         p2 = (ImageView)findViewById(R.id.imageView13);
         p3 = (ImageView)findViewById(R.id.imageView14);
@@ -74,9 +87,76 @@ public class Seleccion extends AppCompatActivity {
         aceptar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                consultarusuario();
+
+
+                try {
+
+                    ConexionSeleccion web = new ConexionSeleccion(Seleccion.this);
+                    web.agregarVariables("usuario", usu);
+                    web.agregarVariables("personaje",p+"");
+                    web.execute(new URL("http://kaiba.esy.es/insertarpersonaje.php"));
+
+                } catch (MalformedURLException e) {
+                    AlertDialog.Builder alerta = new AlertDialog.Builder(Seleccion.this);
+                    alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+                }
             }
         });
 
+    }
+
+    public void consultarusuario(){
+        try{
+            SQLiteDatabase bd = base.getReadableDatabase();
+            String sql = "SELECT USUARIO FROM USUARIO ";
+            Cursor res = bd.rawQuery(sql, null);
+            if(res.moveToFirst()){
+                usu = res.getString(0);
+                bd.close();
+            }else{
+                bd.close();
+            }
+
+
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(this).setMessage("Consulta erronea: "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
+    }
+
+    public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(Seleccion.this);
+
+
+        if(resultado.startsWith("EXITO")){
+            Toast.makeText(Seleccion.this, "Personaje elegido con éxito", Toast.LENGTH_LONG).show();
+            Intent i = new Intent(Seleccion.this,MenuPrincipal.class );
+            startActivity(i);
+        }
+        else{
+            if(resultado.startsWith("ERROR2")){
+                resultado="Error al enviar el codigo";
+            }
+
+            if(resultado.startsWith("INCORRECTO")){
+                resultado="Código incorrecto, vuelva a intentarlo";
+            }
+
+            alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
 }

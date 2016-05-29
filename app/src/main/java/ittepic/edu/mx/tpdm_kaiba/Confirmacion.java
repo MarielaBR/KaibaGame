@@ -60,18 +60,9 @@ public class Confirmacion extends AppCompatActivity {
 
 
         if(resultado.startsWith("CONFIRMADO")){
+            Toast.makeText(Confirmacion.this,"Su cuenta ha sido confirmada",Toast.LENGTH_LONG).show();
             Intent i = new Intent(Confirmacion.this,Login.class );
-            alerta.setTitle("Felicidades")
-                    .setMessage("Se ha confirmado su cuenta")
-                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.dismiss();
-                        }
-                    })
-                    .show();
             startActivity(i);
-
         }
         else{
             if(resultado.startsWith("ERROR2")){

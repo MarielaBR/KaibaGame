@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.content.Intent;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -38,7 +39,7 @@ public class Confirmacion extends AppCompatActivity {
 
                     ConexionConfirmacion web = new ConexionConfirmacion(Confirmacion.this);
                     web.agregarVariables("usuario", usuario);
-                    web.agregarVariables("contrasena",campocodigo.getText().toString() );
+                    web.agregarVariables("codigo",campocodigo.getText().toString() );
                     web.execute(new URL("http://kaiba.esy.es/confirmacion.php"));
 
                 } catch (MalformedURLException e) {
@@ -56,17 +57,42 @@ public class Confirmacion extends AppCompatActivity {
 
     public void mostrarResultado(String resultado){
         AlertDialog.Builder alerta= new AlertDialog.Builder(Confirmacion.this);
-        alerta.setTitle("ERROR")
 
-                .setMessage("Código Incorrecto, vuelva a ingresar el código de confirmación")
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                })
-                .show();
+
+        if(resultado.startsWith("CONFIRMADO")){
+            Intent i = new Intent(Confirmacion.this,Login.class );
+            alerta.setTitle("Felicidades")
+                    .setMessage("Se ha confirmado su cuenta")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            startActivity(i);
+
         }
+        else{
+            if(resultado.startsWith("ERROR2")){
+                    resultado="Error al enviar el codigo";
+            }
+
+            if(resultado.startsWith("INCORRECTO")){
+                resultado="Código incorrecto, vuelva a intentarlo";
+            }
+
+                    alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            }
+    }
 
 
 }

@@ -5,40 +5,49 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="70dp"
+        android:layout_height="60dp"
         android:id="@+id/imageView6"
-        android:src="@drawable/kaibap"
-        android:layout_weight="0.03" />
+        android:src="@drawable/kaibap" />
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView7"
         android:src="@drawable/partida"
-        android:layout_weight="0.02" />
+        android:layout_weight="0.02"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView8"
-        android:src="@drawable/amigos" />
+        android:src="@drawable/amigos"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView9"
-        android:src="@drawable/mensajes" />
+        android:src="@drawable/mensajes"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView10"
-        android:src="@drawable/puntuaciones" />
+        android:src="@drawable/puntuaciones"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <ImageView
-        android:layout_width="35dp"
-        android:layout_height="35dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageView11"
-        android:src="@drawable/salir" />
+        android:src="@drawable/salir"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 </LinearLayout>

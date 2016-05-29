@@ -34,8 +34,10 @@
         <activity
             android:name=".Confirmacion"
             android:screenOrientation="portrait" />
-        <activity android:name=".Partida" />
-        <activity android:name=".Seleccion"></activity>
+        <activity android:name=".Partida"
+            android:screenOrientation="sensorLandscape"/>
+        <activity android:name=".Seleccion"
+            android:screenOrientation="sensorLandscape"></activity>
     </application>
 
 </manifest>

@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -14,11 +15,15 @@ import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Random;
 
 
 public class Registro extends AppCompatActivity {
     ImageView aceptar;
     EditText usuario,contrasena,email,telefono;
+    Random rnd = new Random();
+    String numero;
+    String telefonito;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,11 +46,14 @@ public class Registro extends AppCompatActivity {
                             if(usuario.getText().toString().matches("[A-Za-z0-9]*") && usuario.getText().toString().length()<=20){
                                 if(contrasena.getText().toString().length()<=20) {
                                     try {
+                                        numero=(int) (rnd.nextDouble() * 99999 + 1000)+"";
+                                        telefonito=telefono.getText().toString();
                                         ConexionRegistro web = new ConexionRegistro(Registro.this);
                                         web.agregarVariables("usuario", usuario.getText().toString());
                                         web.agregarVariables("contrasena", contrasena.getText().toString());
                                         web.agregarVariables("email", email.getText().toString());
-                                        web.agregarVariables("telefono", telefono.getText().toString());
+                                        web.agregarVariables("telefono", telefonito);
+                                        web.agregarVariables("codigo", numero);
                                         web.execute(new URL("http://kaiba.esy.es/buscarinsertarusuario.php"));
 
                                     } catch (MalformedURLException e) {
@@ -127,11 +135,31 @@ public class Registro extends AppCompatActivity {
     }
 
 
+
+    public void mensajesSMS(){
+        SmsManager enviarSMS = SmsManager.getDefault();
+        enviarSMS.sendTextMessage(telefonito, null, numero, null, null);
+
+    }
+
     public void mostrarResultado(String resultado){
 
         if(resultado.startsWith("EXITO")){
-            Toast.makeText(this,"cuenta creada correctamente",Toast.LENGTH_LONG).show();
-            Intent i = new Intent(Registro.this, Login.class );
+            //Toast.makeText(this,"cuenta creada correctamente",Toast.LENGTH_LONG).show();
+            AlertDialog.Builder alerta= new AlertDialog.Builder(this);
+            alerta.setTitle("Mensaje Enviado")
+
+                    .setMessage("Se ha enviado un mensaje con el número de confirmación")
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+            mensajesSMS();
+
+            Intent i = new Intent(Registro.this, Confirmacion.class );
             startActivity(i);
         }else{
             AlertDialog.Builder alerta= new AlertDialog.Builder(this);

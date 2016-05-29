@@ -16,7 +16,7 @@
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity
             android:name=".Principal"
-            android:screenOrientation="reverseLandscape">
+            android:screenOrientation="sensorLandscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -25,7 +25,7 @@
         </activity>
         <activity
             android:name=".MenuPrincipal"
-            android:screenOrientation="reverseLandscape" />
+            android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".Login"
             android:screenOrientation="portrait" />

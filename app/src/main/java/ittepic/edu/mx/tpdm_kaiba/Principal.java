@@ -49,12 +49,13 @@ public class Principal extends AppCompatActivity {
         mini= BitmapFactory.decodeResource(getResources(), R.drawable.kaiba2);
         desliza= BitmapFactory.decodeResource(getResources(), R.drawable.deslizar);
 
-        timer=new CountDownTimer(10000,50) {
+        timer=new CountDownTimer(5000,100) {
             @Override
             public void onTick(long millisUntilFinished) {
-                if(transparencia<255){
-                    transparencia+=3;
+                if(transparencia<251){
+                    transparencia+=7;
                 }else {
+                    timer.onFinish();
                     timer.cancel();
                 }
                 lienzo.invalidate();
@@ -100,19 +101,21 @@ public class Principal extends AppCompatActivity {
     }
 
     public void fond(){
-        timer2=new CountDownTimer(10000,50) {
+        timer2=new CountDownTimer(5000,100) {
             @Override
             public void onTick(long millisUntilFinished) {
                 if(tl<250){
                     tl+=10;
                 }else{
+                    timer2.onFinish();
                     timer2.cancel();
                 }
                 lienzo.invalidate();
             }
             @Override
             public void onFinish() {
-                lienzo.invalidate();
+                Intent i = new Intent(Principal.this, Login.class);
+                startActivity(i);
             }
         };
         timer2.start();

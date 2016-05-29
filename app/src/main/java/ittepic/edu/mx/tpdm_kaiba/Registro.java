@@ -24,6 +24,7 @@ public class Registro extends AppCompatActivity {
     Random rnd = new Random();
     String numero;
     String telefonito;
+    String username;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -47,9 +48,10 @@ public class Registro extends AppCompatActivity {
                                 if(contrasena.getText().toString().length()<=20) {
                                     try {
                                         numero=(int) (rnd.nextDouble() * 99999 + 1000)+"";
+                                        username=usuario.getText().toString();
                                         telefonito=telefono.getText().toString();
                                         ConexionRegistro web = new ConexionRegistro(Registro.this);
-                                        web.agregarVariables("usuario", usuario.getText().toString());
+                                        web.agregarVariables("usuario", username);
                                         web.agregarVariables("contrasena", contrasena.getText().toString());
                                         web.agregarVariables("email", email.getText().toString());
                                         web.agregarVariables("telefono", telefonito);
@@ -160,6 +162,8 @@ public class Registro extends AppCompatActivity {
             mensajesSMS();
 
             Intent i = new Intent(Registro.this, Confirmacion.class );
+            i.putExtra("codigo", numero);
+            i.putExtra("usuario", username);
             startActivity(i);
         }else{
             AlertDialog.Builder alerta= new AlertDialog.Builder(this);

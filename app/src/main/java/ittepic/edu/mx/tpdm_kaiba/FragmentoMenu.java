@@ -109,7 +109,7 @@ public class FragmentoMenu extends Fragment{
 
                 FragmentManager fm = getFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                ft.replace(R.id.contenedor_fragment, new FragmentoMensajes());
+                ft.replace(R.id.contenedor_fragment, new FragmentoPuntuaciones());
                 ft.commit();
             }
         });

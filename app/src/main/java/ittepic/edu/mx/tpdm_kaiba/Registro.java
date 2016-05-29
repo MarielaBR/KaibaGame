@@ -157,11 +157,9 @@ public class Registro extends AppCompatActivity {
             if(resultado.startsWith("TELEFONO DUPLICADO")){
                 resultado="YA EXISTE UNA CUENTA CON ESE NUMERO DE TELÈFONO";
             }
-<<<<<<< HEAD
+
             alerta.setTitle("ERROR")
-=======
-            alerta.setTitle("Error")
->>>>>>> f6342fddb533c64b4b70db0e36302e57901224ab
+
                     .setMessage(resultado)
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override

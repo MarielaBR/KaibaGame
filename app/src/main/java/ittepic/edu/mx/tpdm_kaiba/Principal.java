@@ -94,6 +94,7 @@ public class Principal extends AppCompatActivity {
             if(e.getAction() == MotionEvent.ACTION_DOWN){
                 Intent i = new Intent(Principal.this, Login.class);
                 startActivity(i);
+                Principal.this.finish();
             }
             return true;
         }
@@ -116,6 +117,7 @@ public class Principal extends AppCompatActivity {
             public void onFinish() {
                 Intent i = new Intent(Principal.this, Login.class);
                 startActivity(i);
+                Principal.this.finish();
             }
         };
         timer2.start();

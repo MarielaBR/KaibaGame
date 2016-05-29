@@ -138,6 +138,7 @@ public class Seleccion extends AppCompatActivity {
             Toast.makeText(Seleccion.this, "Personaje elegido con éxito", Toast.LENGTH_LONG).show();
             Intent i = new Intent(Seleccion.this,MenuPrincipal.class );
             startActivity(i);
+            Seleccion.this.finish();
         }
         else{
             if(resultado.startsWith("ERROR2")){

@@ -81,11 +81,6 @@ public class Login extends AppCompatActivity {
         });
     }
 
-    public void onDestroy(){
-        super.onDestroy();
-        System.exit(0);
-
-    }
 
     public String consultarusuario(){
         try{

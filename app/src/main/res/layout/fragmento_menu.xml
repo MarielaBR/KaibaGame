@@ -5,49 +5,54 @@
     android:weightSum="1">
 
     <ImageView
-        android:layout_width="70dp"
+        android:layout_width="60dp"
         android:layout_height="60dp"
         android:id="@+id/imageView6"
-        android:src="@drawable/kaibap" />
+        android:src="@drawable/kaibap"
+        android:layout_marginLeft="5dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView7"
         android:src="@drawable/partida"
-        android:layout_weight="0.02"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="12dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView8"
         android:src="@drawable/amigos"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="12dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView9"
         android:src="@drawable/mensajes"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="12dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView10"
         android:src="@drawable/puntuaciones"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="12dp"/>
 
     <ImageView
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:id="@+id/imageView11"
         android:src="@drawable/salir"
+        android:layout_marginTop="7dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"/>
+        android:layout_marginRight="12dp"/>
 </LinearLayout>

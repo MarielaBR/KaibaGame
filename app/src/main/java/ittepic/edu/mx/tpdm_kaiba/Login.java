@@ -83,7 +83,7 @@ public class Login extends AppCompatActivity {
     public void mostrarResultado(String resultado){
 
     if(resultado.startsWith("encontrado")){
-        Intent i = new Intent(Login.this, MenuPrincipal.class );
+        Intent i = new Intent(Login.this, Seleccion.class );
         startActivity(i);
     }else{
         AlertDialog.Builder alerta= new AlertDialog.Builder(this);

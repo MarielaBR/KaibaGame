@@ -1,5 +1,8 @@
 package ittepic.edu.mx.tpdm_kaiba;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -14,6 +17,9 @@ import android.text.method.ScrollingMovementMethod;
 import android.os.Handler;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by Cesar_pruefkd on 28/05/2016.
  */
@@ -21,11 +27,12 @@ public class Conversacion extends AppCompatActivity{
     EditText campo;
     TextView area;
     String msj,rec,idRem;
+    
     ImageView enviar;
     Thread t;
-    Bundle datos;
     boolean ref;
     final Handler handle = new Handler();
+    String usu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +40,19 @@ public class Conversacion extends AppCompatActivity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_seleccion);
+        setContentView(R.layout.activity_conversacion);
 
-        idRem = "Bearnal";
+        usu = "Bearnal";
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
-        enviar =(ImageView)findViewById(R.id.imageView24);
+        enviar =(ImageView)findViewById(R.id.enviarMensaje);
         ref=true;
-        area.setMovementMethod(new ScrollingMovementMethod());
 
-        cargarMensajes();
-        miThread();
+        idRem = getIntent().getStringExtra("usuario");
+
+        //cargarMensajes();
+        //miThread();
+
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +64,7 @@ public class Conversacion extends AppCompatActivity{
         });
 
     }
+
 
     protected void miThread(){
         t = new Thread(){
@@ -79,12 +89,22 @@ public class Conversacion extends AppCompatActivity{
         }
     };
 
-    private void cargarMensajes(){/*
-        ConexionHTTP con = new ConexionHTTP();
+    private void cargarMensajes(){
 
-        con.agregarVariables("ID_PACIENTE", idPaciente);
+        try {
 
-        String resp = con.conectarHTTP("http://diamondnutrition.co.nf/cargar_mensajes_admin.php");
+            ConexionConversacion web = new ConexionConversacion(Conversacion.this);
+            web.agregarVariables("usuario", idRem);
+
+            //change
+            web.execute(new URL("http://kaiba.esy.es/insertarpersonaje.php"));
+
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+        }
+    /*
+
 
         resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
         String[] vectorP = resp.split("&&");
@@ -103,13 +123,24 @@ public class Conversacion extends AppCompatActivity{
 
     }
 
-    private void enviarMensaje(){/*
-        ConexionHTTP con = new ConexionHTTP();
+    private void enviarMensaje(){
+        try {
 
-        con.agregarVariables("ID_PACIENTE", idPaciente);
-        con.agregarVariables("MENSAJE", campo.getText().toString());
+            ConexionConversacion web = new ConexionConversacion(Conversacion.this);
+            web.agregarVariables("usuario", usu);
+            web.agregarVariables("rem",idRem);
+            web.agregarVariables("mensaje", campo.getText().toString());
 
 
+            //change
+            web.execute(new URL("http://kaiba.esy.es/enviarmensaje.php"));
+
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+        }
+
+    /*
         String resp = con.conectarHTTP("http://diamondnutrition.co.nf/enviar_msj_paciente.php");
 
         resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
@@ -125,6 +156,36 @@ public class Conversacion extends AppCompatActivity{
     public void onDestroy() {
         ref = false;
         super.onDestroy();
+    }
+
+    public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(Conversacion.this);
+
+
+        if(resultado.startsWith("Mensaje")){
+            Toast.makeText(Conversacion.this,"Mensaje enviado",Toast.LENGTH_LONG).show();
+
+
+        }
+        else{
+            if(resultado.startsWith("ERROR2")){
+                resultado="Error al enviar el codigo";
+            }
+
+            if(resultado.startsWith("INCORRECTO")){
+                resultado="Código incorrecto, vuelva a intentarlo";
+            }
+
+            alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
 
 }

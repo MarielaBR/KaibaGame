@@ -1,59 +1,57 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
     android:background="@drawable/logohor"
-    android:layout_MarginLeft="20dp"
-    android:layout_MarginRight="20dp">
+    tools:context="ittepic.edu.mx.tpdm_kaiba.Conversacion">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fragmento mensajes 2"
-        android:id="@+id/textView6"
-        android:layout_gravity="center_horizontal" />
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="Fragmento mensajes 2"
+    android:id="@+id/textView6"
+    android:layout_gravity="center_horizontal" />
 
-    <TextView
-        android:layout_MarginLeft="20dp"
-        android:layout_Margin="20dp"
-        android:id="@+id/TextView17"
-        android:layout_width="match_parent"
-        android:layout_height="149dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="49dp"
-        android:background="#55FFFFFF"
-        android:ems="10"
-        android:inputType="textMultiLine"
-        android:lines="15"
-        android:textSize="20sp"
-        android:minLines="15"
-        android:scrollbars = "vertical"
-        android:gravity="bottom"
-        android:textColor="#000000"
-        android:layout_weight="0.10" />
+<TextView
+    android:id="@+id/TextView17"
+    android:layout_width="match_parent"
+    android:layout_height="149dp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="49dp"
+    android:background="#55FFFFFF"
+    android:ems="10"
+    android:inputType="textMultiLine"
+    android:lines="15"
+    android:textSize="20sp"
+    android:minLines="15"
+    android:scrollbars = "vertical"
+    android:gravity="bottom"
+    android:textColor="#000000"
+    android:layout_weight="0.10" />
 
-    <EditText
-        android:id="@+id/editText8"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/TextView17"
-        android:layout_alignRight="@+id/TextView17"
-        android:layout_below="@+id/TextView17"
-        android:layout_marginTop="30dp"
-        android:ems="10"
-        android:layout_weight="0.17" />
+<EditText
+    android:id="@+id/editText8"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignLeft="@+id/TextView17"
+    android:layout_alignRight="@+id/TextView17"
+    android:layout_below="@+id/TextView17"
+    android:layout_marginTop="30dp"
+    android:ems="10"
+    android:layout_weight="0.17" />
 
-    <ImageView
-        android:id="@+id/imageView24"
-        android:layout_width="100dp"
-        android:layout_height="24dp"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="25dp"
-        android:src="@drawable/aceptar"
-        android:layout_gravity="right" />
+<ImageView
+    android:id="@+id/enviarMensaje"
+    android:layout_width="100dp"
+    android:layout_height="24dp"
+    android:layout_alignParentBottom="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginBottom="25dp"
+    android:src="@drawable/aceptar"
+    android:layout_gravity="right" />
 
 </LinearLayout>

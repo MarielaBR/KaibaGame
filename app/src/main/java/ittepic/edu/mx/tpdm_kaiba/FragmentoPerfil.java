@@ -28,14 +28,14 @@ public class FragmentoPerfil extends Fragment{
         puntos.setTypeface(normal);
 
         usuario = (TextView)root.findViewById(R.id.textView);
-        Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams_BoldItalic.ttf");
+        Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBoldItalic.ttf");
         puntos.setTypeface(ncursiva);
 
         nivel = (TextView)root.findViewById(R.id.textView9);
         nivel.setTypeface(normal);
 
         tvictorias = (TextView)root.findViewById(R.id.textView10);
-        Typeface negrita = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams_Bold.ttf");
+        Typeface negrita = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBold.ttf");
         puntos.setTypeface(negrita);
 
         tderrotas = (TextView)root.findViewById(R.id.textView11);

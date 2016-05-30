@@ -15,6 +15,9 @@ public class FragmentoAmigos extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_amigos, container, false);
 
+
+
+        
         return root;
 
     }

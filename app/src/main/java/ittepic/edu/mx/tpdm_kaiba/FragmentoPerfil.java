@@ -24,14 +24,14 @@ public class FragmentoPerfil extends Fragment{
         root = inflater.inflate(R.layout.fragmento_perfil, container, false);
 
         puntos = (TextView)root.findViewById(R.id.textView8);
-        Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
-        puntos.setTypeface(normal);
+        /*Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+        puntos.setTypeface(normal);*/
 
         usuario = (TextView)root.findViewById(R.id.textView);
         Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBoldItalic.ttf");
         puntos.setTypeface(ncursiva);
 
-        nivel = (TextView)root.findViewById(R.id.textView9);
+        /*nivel = (TextView)root.findViewById(R.id.textView9);
         nivel.setTypeface(normal);
 
         tvictorias = (TextView)root.findViewById(R.id.textView10);
@@ -45,7 +45,7 @@ public class FragmentoPerfil extends Fragment{
         puntos.setTypeface(normal);
 
         derrotas = (TextView)root.findViewById(R.id.textView13);
-        puntos.setTypeface(normal);
+        puntos.setTypeface(normal);*/
 
 
         return root;

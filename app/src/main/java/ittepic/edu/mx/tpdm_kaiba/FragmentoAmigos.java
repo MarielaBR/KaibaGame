@@ -17,7 +17,7 @@ public class FragmentoAmigos extends Fragment{
 
 
 
-        
+
         return root;
 
     }

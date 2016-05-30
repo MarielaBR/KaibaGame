@@ -4,8 +4,12 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:weightSum="1"
+<<<<<<< HEAD
+    android:background="@drawable/logohor">
+=======
     android:background="@drawable/logohor"
     tools:context="ittepic.edu.mx.tpdm_kaiba.Conversacion">
+>>>>>>> bc533d742ad0202a11e788cc4fa395442ef0d2bf
 
 <TextView
     android:layout_width="wrap_content"
@@ -15,6 +19,25 @@
     android:id="@+id/textView6"
     android:layout_gravity="center_horizontal" />
 
+<<<<<<< HEAD
+    <TextView
+        android:id="@+id/TextView17"
+        android:layout_width="match_parent"
+        android:layout_height="149dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="49dp"
+        android:background="#55FFFFFF"
+        android:ems="10"
+        android:inputType="textMultiLine"
+        android:lines="15"
+        android:textSize="20sp"
+        android:minLines="15"
+        android:scrollbars = "vertical"
+        android:gravity="bottom"
+        android:textColor="#000000"
+        android:layout_weight="0.10" />
+=======
 <TextView
     android:id="@+id/TextView17"
     android:layout_width="match_parent"
@@ -32,6 +55,7 @@
     android:gravity="bottom"
     android:textColor="#000000"
     android:layout_weight="0.10" />
+>>>>>>> bc533d742ad0202a11e788cc4fa395442ef0d2bf
 
     <LinearLayout
         android:orientation="horizontal"

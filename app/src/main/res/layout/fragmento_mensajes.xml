@@ -8,7 +8,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fragmento mensajes"
+        android:text="Selecciona a un amigo"
         android:id="@+id/textView4"
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF" />
@@ -19,4 +19,9 @@
         android:id="@+id/imageView25"
         android:layout_gravity="center_horizontal"
         android:src="@drawable/aceptar" />
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/listView2" />
 </LinearLayout>

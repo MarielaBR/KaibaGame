@@ -19,9 +19,9 @@ import java.util.List;
  */
 public class ConexionPerfil extends AsyncTask<URL,String,String>{
     List<String[]> variables;
-    Confirmacion puntero;
+    FragmentoPerfil puntero;
 
-    public ConexionPerfil(Confirmacion p){
+    public ConexionPerfil(FragmentoPerfil p){
         variables= new ArrayList<String[]>();
         puntero=p;
     }

@@ -16,6 +16,7 @@ import android.widget.ImageView;
  */
 public class FragmentoMenu extends Fragment{
     View root;
+    ConexionBD bd;
     ImageView inicio,partida,amigos,mensajes,puntuaciones,salir;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_menu, container, false);
@@ -26,6 +27,8 @@ public class FragmentoMenu extends Fragment{
         mensajes = (ImageView) root.findViewById(R.id.imageView9);
         puntuaciones = (ImageView) root.findViewById(R.id.imageView10);
         salir = (ImageView) root.findViewById(R.id.imageView11);
+
+        bd = new ConexionBD(getActivity(),"kaiba",null,1);
 
         inicio.setImageResource(R.drawable.kaibap2);
 

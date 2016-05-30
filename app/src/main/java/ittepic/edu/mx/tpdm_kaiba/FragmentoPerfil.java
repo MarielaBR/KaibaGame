@@ -23,29 +23,30 @@ public class FragmentoPerfil extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_perfil, container, false);
 
+        Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+        Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBoldItalic.ttf");
+        Typeface negrita = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBold.ttf");
+
         puntos = (TextView)root.findViewById(R.id.textView8);
-        /*Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
-        puntos.setTypeface(normal);*/
+        puntos.setTypeface(normal);
 
         usuario = (TextView)root.findViewById(R.id.textView);
-        Typeface ncursiva = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBoldItalic.ttf");
-        puntos.setTypeface(ncursiva);
+        usuario.setTypeface(ncursiva);
 
-        /*nivel = (TextView)root.findViewById(R.id.textView9);
+        nivel = (TextView)root.findViewById(R.id.textView9);
         nivel.setTypeface(normal);
 
         tvictorias = (TextView)root.findViewById(R.id.textView10);
-        Typeface negrita = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreamsBold.ttf");
-        puntos.setTypeface(negrita);
+        tvictorias.setTypeface(negrita);
 
         tderrotas = (TextView)root.findViewById(R.id.textView11);
-        puntos.setTypeface(negrita);
+        tderrotas.setTypeface(negrita);
 
         victorias = (TextView)root.findViewById(R.id.textView12);
-        puntos.setTypeface(normal);
+        victorias.setTypeface(normal);
 
         derrotas = (TextView)root.findViewById(R.id.textView13);
-        puntos.setTypeface(normal);*/
+        derrotas.setTypeface(normal);
 
 
         return root;

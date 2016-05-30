@@ -33,26 +33,47 @@
     android:textColor="#000000"
     android:layout_weight="0.10" />
 
-<EditText
-    android:id="@+id/editText8"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_alignLeft="@+id/TextView17"
-    android:layout_alignRight="@+id/TextView17"
-    android:layout_below="@+id/TextView17"
-    android:layout_marginTop="30dp"
-    android:ems="10"
-    android:layout_weight="0.17"
-    android:textColor="#DDDDDD" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="1">
 
-<ImageView
-    android:id="@+id/enviarMensaje"
-    android:layout_width="100dp"
-    android:layout_height="24dp"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:layout_marginBottom="25dp"
-    android:src="@drawable/aceptar"
-    android:layout_gravity="right" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="497dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.74">
+
+            <EditText
+            android:id="@+id/editText8"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/TextView17"
+            android:layout_alignRight="@+id/TextView17"
+            android:layout_below="@+id/TextView17"
+            android:layout_marginTop="30dp"
+            android:ems="10"
+            android:layout_weight="0.00"
+            android:textColor="#DDDDDD" />
+
+            <ImageView
+            android:id="@+id/enviarMensaje"
+            android:layout_width="100dp"
+            android:layout_height="24dp"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="25dp"
+            android:src="@drawable/aceptar"
+                android:layout_gravity="right" />
+        </LinearLayout>
+
+        <ImageView
+            android:layout_width="158dp"
+            android:layout_height="158dp"
+            android:id="@+id/imageView24"
+            android:src="@drawable/escribe" />
+
+    </LinearLayout>
 
 </LinearLayout>

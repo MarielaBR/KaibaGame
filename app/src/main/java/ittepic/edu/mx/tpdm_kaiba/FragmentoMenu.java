@@ -5,6 +5,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
@@ -136,6 +137,8 @@ public class FragmentoMenu extends Fragment{
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         actualizar();
+                        Intent ventana=new Intent(getActivity(),Login.class);
+                        startActivity(ventana);
                         getActivity().finish();
                     }
                 });

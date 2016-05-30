@@ -80,6 +80,18 @@ public class Seleccion extends AppCompatActivity {
                 t3.setImageResource(R.drawable.n3e);
 
                 p=2;
+
+                ImageView image = new ImageView(Seleccion.this);
+                image.setImageResource(R.drawable.p2);
+
+                LayoutInflater inflater= LayoutInflater.from(Seleccion.this);
+                View view=inflater.inflate(R.layout.lucy, null);
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Seleccion.this);
+                alertDialog.setTitle("Lucy");
+                alertDialog.setView(view);
+                alertDialog.setPositiveButton("Vale", null);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         });
         p3.setOnClickListener(new View.OnClickListener() {
@@ -94,17 +106,18 @@ public class Seleccion extends AppCompatActivity {
                 t3.setImageResource(R.drawable.n3);
 
                 ImageView image = new ImageView(Seleccion.this);
-                image.setImageResource(R.drawable.p1);
-            /*
-                AlertDialog.Builder builder = new AlertDialog.Builder(Seleccion.this).setTitle("Pette").
-                        setMessage("Intrépido y temerario guerrero, lo cierto es que Pette sabe hacer hablar a sus armas.\n \n PV: 30 \n PM:4 \n PA:6").
-                        setPositiveButton("Vale", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                dialog.dismiss();
-                            }
-                        }).setView(image);
-                builder.create().show();*/
+                image.setImageResource(R.drawable.p3);
+
+                LayoutInflater inflater= LayoutInflater.from(Seleccion.this);
+                View view=inflater.inflate(R.layout.midna, null);
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Seleccion.this);
+                alertDialog.setTitle("Midna");
+                alertDialog.setView(view);
+                alertDialog.setPositiveButton("Vale", null);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
+
                 p=3;
             }
         });

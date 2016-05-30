@@ -18,7 +18,7 @@
                 android:layout_width="130dp"
                 android:layout_height="228dp"
                 android:id="@+id/imageView20"
-                android:src="@drawable/p3" />
+                android:src="@drawable/p2" />
 
             <LinearLayout
                 android:orientation="vertical"
@@ -32,7 +32,7 @@
                     android:layout_height="125dp"
                     android:editable="false"
                     android:textAlignment="center"
-                    android:text="Aparecio por un extraño accidente en el mundo de Kaiba. Se mueve a la velocidad de un rayo, desaparece en un abrir y cerrar de ojos. \n\nHechicera muy poderosa que usa la utilidad de sus hechizos para ganar batallas."
+                    android:text="Pequeña arquera tan orgullosa como precisa. Aliada de gran valor contra los adeptos del cuerpo a cuerpo. \n\nAún a distancia, sabe alcanzar con sus afilados proyectiles el orificio más minúsculo que el enemigo deje sin vigilancia."
                     android:layout_weight="0.68" />
 
                 <LinearLayout

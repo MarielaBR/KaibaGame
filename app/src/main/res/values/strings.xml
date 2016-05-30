@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TPDM_Kaiba</string>
+    <array name="prueba">
+        <item>jhon</item>
+        <item>lupita</item>
+        <item>Pedro</item>
+        <item>Paco</item>
+        <item>juan</item>
+    </array>
+
 </resources>

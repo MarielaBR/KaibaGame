@@ -13,19 +13,21 @@ import android.widget.ListView;
 public class FragmentoPuntuaciones extends Fragment{
     View root;
     String[] titulo = new String[]{
-            "juan",
-            "Paco",
-            "pedro",
-            "lupita",
-            "no",
+            "Usuario         Nivel            Puntuación",
+            "   -              -                  -     ",
+            "   -              -                  -     ",
+            "   -              -                  -     ",
+            "   -              -                  -     ",
+            "   -              -                  -     ",
     };
 
     int[] imagenes = {
-            R.drawable.trofeodorado2,
-            R.drawable.trofeoplatedo2,
-            R.drawable.trofeobronce2,
-            R.drawable.trofeox2,
-            R.drawable.trofeox2
+            R.drawable.vacio,
+            R.drawable.c1,
+            R.drawable.c2,
+            R.drawable.c3,
+            R.drawable.c4,
+            R.drawable.c5
     };
     ListViewAdapter adapter;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {

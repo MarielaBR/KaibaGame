@@ -19,7 +19,7 @@
             android:id="@+id/list_row_image"
             android:layout_width="30dip"
             android:layout_height="30dip"
-            android:src="@drawable/trofeox2"/>
+            android:src="@drawable/vacio"/>
 
     </LinearLayout>
 

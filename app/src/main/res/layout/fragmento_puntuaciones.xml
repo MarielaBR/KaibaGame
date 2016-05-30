@@ -4,17 +4,16 @@
     android:layout_height="match_parent"
     android:background="@drawable/logohor">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Fragmento puntuaciones"
-        android:id="@+id/textView5"
-        android:layout_gravity="center_horizontal" />
+        android:id="@+id/imageView12"
+        android:layout_gravity="center_horizontal"
+        android:src="@drawable/tp" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/listView" />
-
+        android:id="@+id/listView"
+        android:layout_gravity="center_horizontal" />
 </LinearLayout>

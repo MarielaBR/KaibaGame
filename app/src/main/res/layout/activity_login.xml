@@ -60,7 +60,7 @@
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="25dp"
+                android:layout_height="28dp"
                 android:id="@+id/imageView4"
                 android:src="@drawable/reg" />
         </LinearLayout>

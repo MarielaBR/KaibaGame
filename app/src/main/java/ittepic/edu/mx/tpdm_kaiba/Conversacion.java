@@ -1,10 +1,10 @@
 package ittepic.edu.mx.tpdm_kaiba;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -14,6 +14,9 @@ import android.text.method.ScrollingMovementMethod;
 import android.os.Handler;
 import android.widget.Toast;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+
 /**
  * Created by Cesar_pruefkd on 28/05/2016.
  */
@@ -21,11 +24,12 @@ public class Conversacion extends AppCompatActivity{
     EditText campo;
     TextView area;
     String msj,rec,idRem;
+    
     ImageView enviar;
     Thread t;
-    Bundle datos;
     boolean ref;
     final Handler handle = new Handler();
+    String usu;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,17 +37,20 @@ public class Conversacion extends AppCompatActivity{
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        setContentView(R.layout.activity_seleccion);
+        setContentView(R.layout.activity_conversacion);
 
-        idRem = "Bearnal";
+        usu = "Bearnal";
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
-        enviar =(ImageView)findViewById(R.id.imageView24);
+        enviar =(ImageView)findViewById(R.id.enviarMensaje);
         ref=true;
         area.setMovementMethod(new ScrollingMovementMethod());
 
+        idRem = getIntent().getStringExtra("usuario");
+
         cargarMensajes();
         miThread();
+
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -55,6 +62,7 @@ public class Conversacion extends AppCompatActivity{
         });
 
     }
+
 
     protected void miThread(){
         t = new Thread(){
@@ -79,52 +87,92 @@ public class Conversacion extends AppCompatActivity{
         }
     };
 
-    private void cargarMensajes(){/*
-        ConexionHTTP con = new ConexionHTTP();
+    private void cargarMensajes(){
 
-        con.agregarVariables("ID_PACIENTE", idPaciente);
+        try {
 
-        String resp = con.conectarHTTP("http://diamondnutrition.co.nf/cargar_mensajes_admin.php");
+            ConexionConversacion web = new ConexionConversacion(Conversacion.this);
+            web.agregarVariables("USUARIO", usu);
+            web.agregarVariables("DEST",idRem);
+            web.agregarVariables("usuario", idRem);
 
-        resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
-        String[] vectorP = resp.split("&&");
+            //change
+            web.execute(new URL("http://kaiba.esy.es/cargarmensaje.php"));
 
-        area.setText("");
-        if(vectorP[0].equals(" ")){
-            area.setText("Escribe mensaje.");
-            return;
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
         }
-        if(area.getText().toString().equals("Escribe mensaje."))
-            area.setText("");
-        for(int i=vectorP.length-1;i>=0;i--){
-            area.setText(area.getText().toString()+'\n'+vectorP[i]);
-        }
-*/
+
 
     }
 
-    private void enviarMensaje(){/*
-        ConexionHTTP con = new ConexionHTTP();
+    private void enviarMensaje(){
+        try {
 
-        con.agregarVariables("ID_PACIENTE", idPaciente);
-        con.agregarVariables("MENSAJE", campo.getText().toString());
+            ConexionConversacion web = new ConexionConversacion(Conversacion.this);
+            web.agregarVariables("usuario", usu);
+            web.agregarVariables("rem",idRem);
+            web.agregarVariables("mensaje", campo.getText().toString());
 
 
-        String resp = con.conectarHTTP("http://diamondnutrition.co.nf/enviar_msj_paciente.php");
+            //change
+            web.execute(new URL("http://kaiba.esy.es/enviarmensaje.php"));
 
-        resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+        }
 
-        Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
-
-        if(resp.equals("Mensaje enviado.")){
-            cargarMensajes();
-            return;
-        }*/
     }
 
     public void onDestroy() {
         ref = false;
         super.onDestroy();
+    }
+
+    public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(Conversacion.this);
+
+
+        if(resultado.startsWith("Mensaje")){
+            Toast.makeText(Conversacion.this,"Mensaje enviado",Toast.LENGTH_LONG).show();
+        }else if(resultado.startsWith("-msj")){
+            resultado = resultado.substring(resultado.indexOf("-msj-")+5,resultado.indexOf("-/msj-"));
+            String[] vectorP = resultado.split("&&");
+            area.setText("");
+            if(vectorP[0].equals(" ")){
+                area.setText("Escribe mensaje.");
+                return;
+            }
+            if(area.getText().toString().equals("Escribe mensaje."))
+                area.setText("");
+            for(int i=vectorP.length-1;i>=0;i--){
+                area.setText(area.getText().toString()+'\n'+vectorP[i]);
+            }
+
+
+        }else if (resultado.startsWith("/**/")){
+
+        }  else {
+            if (resultado.startsWith("ERROR2")) {
+                resultado = "Error al enviar el codigo";
+            }
+
+            if (resultado.startsWith("INCORRECTO")) {
+                resultado="Código incorrecto, vuelva a intentarlo";
+            }
+
+            alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }
     }
 
 }

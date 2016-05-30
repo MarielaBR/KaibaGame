@@ -40,7 +40,8 @@
         <activity
             android:name=".Seleccion"
             android:screenOrientation="sensorLandscape" />
-        <activity android:name=".Conversacion"></activity>
+        <activity android:name=".Conversacion"
+            android:screenOrientation="sensorLandscape"></activity>
     </application>
 
 </manifest>

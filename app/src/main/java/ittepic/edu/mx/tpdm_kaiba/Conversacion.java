@@ -42,15 +42,15 @@ public class Conversacion extends AppCompatActivity{
 
         setContentView(R.layout.activity_conversacion);
 
-        usu = "Bearnal";
+        idRem = "Bearnal";
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
         enviar =(ImageView)findViewById(R.id.enviarMensaje);
         ref=true;
 
-        idRem = getIntent().getStringExtra("usuario");
+        usu = getIntent().getStringExtra("usuario");
 
-        //cargarMensajes();
+        cargarMensajes();
         //miThread();
 
         enviar.setOnClickListener(new View.OnClickListener() {
@@ -94,32 +94,18 @@ public class Conversacion extends AppCompatActivity{
         try {
 
             ConexionConversacion web = new ConexionConversacion(Conversacion.this);
+            web.agregarVariables("USUARIO", usu);
+            web.agregarVariables("DEST",idRem);
             web.agregarVariables("usuario", idRem);
 
             //change
-            web.execute(new URL("http://kaiba.esy.es/insertarpersonaje.php"));
+            web.execute(new URL("http://kaiba.esy.es/cargarmensaje.php"));
 
         } catch (MalformedURLException e) {
             AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
             alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
         }
-    /*
 
-
-        resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
-        String[] vectorP = resp.split("&&");
-
-        area.setText("");
-        if(vectorP[0].equals(" ")){
-            area.setText("Escribe mensaje.");
-            return;
-        }
-        if(area.getText().toString().equals("Escribe mensaje."))
-            area.setText("");
-        for(int i=vectorP.length-1;i>=0;i--){
-            area.setText(area.getText().toString()+'\n'+vectorP[i]);
-        }
-*/
 
     }
 
@@ -164,15 +150,28 @@ public class Conversacion extends AppCompatActivity{
 
         if(resultado.startsWith("Mensaje")){
             Toast.makeText(Conversacion.this,"Mensaje enviado",Toast.LENGTH_LONG).show();
-
-
         }
-        else{
-            if(resultado.startsWith("ERROR2")){
-                resultado="Error al enviar el codigo";
+        if(resultado.startsWith("-msj")){
+            resultado = resultado.substring(resultado.indexOf("-msj-")+5,resultado.indexOf("-/msj-"));
+            String[] vectorP = resultado.split("&&");
+            area.setText("");
+            if(vectorP[0].equals(" ")){
+                area.setText("Escribe mensaje.");
+                return;
+            }
+            if(area.getText().toString().equals("Escribe mensaje."))
+                area.setText("");
+            for(int i=vectorP.length-1;i>=0;i--){
+                area.setText(area.getText().toString()+'\n'+vectorP[i]);
             }
 
-            if(resultado.startsWith("INCORRECTO")){
+
+        } else {
+            if (resultado.startsWith("ERROR2")) {
+                resultado = "Error al enviar el codigo";
+            }
+
+            if (resultado.startsWith("INCORRECTO")) {
                 resultado="Código incorrecto, vuelva a intentarlo";
             }
 

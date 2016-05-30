@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.content.DialogInterface;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -133,6 +135,7 @@ public class FragmentoMenu extends Fragment{
                 alerta.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        actualizar();
                         getActivity().finish();
                     }
                 });
@@ -154,6 +157,22 @@ public class FragmentoMenu extends Fragment{
 
         return root;
 
+    }
+
+    public void actualizar(){
+        try{
+            SQLiteDatabase base = bd.getWritableDatabase();
+            String sql = "UPDATE USUARIO SET STATUS= '0'";
+            base.execSQL(sql);
+        }catch(SQLiteException sqle){
+            new AlertDialog.Builder(getActivity()).setMessage("error al actualizar "+sqle.getMessage()).setTitle("ERROR").
+                    setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    }).show();
+        }
     }
 
 

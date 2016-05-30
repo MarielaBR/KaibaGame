@@ -31,7 +31,7 @@ public class FragmentoPerfil extends Fragment{
         puntos.setTypeface(normal);
 
         usuario = (TextView)root.findViewById(R.id.textView);
-        usuario.setTypeface(ncursiva);
+        usuario.setTypeface(negrita);
 
         nivel = (TextView)root.findViewById(R.id.textView9);
         nivel.setTypeface(normal);

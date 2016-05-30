@@ -80,6 +80,19 @@ public class Seleccion extends AppCompatActivity {
                 t1.setImageResource(R.drawable.n1e);
                 t2.setImageResource(R.drawable.n2e);
                 t3.setImageResource(R.drawable.n3);
+
+                ImageView image = new ImageView(Seleccion.this);
+                image.setImageResource(R.drawable.p1);
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Seleccion.this).setTitle("Pette").
+                        setMessage("Intrépido y temerario guerrero, lo cierto es que Pette sabe hacer hablar a sus armas.\n \n PV: 30 \n PM:4 \n PA:6").
+                        setPositiveButton("Vale", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        }).setView(image);
+                builder.create().show();
                 p=3;
             }
         });

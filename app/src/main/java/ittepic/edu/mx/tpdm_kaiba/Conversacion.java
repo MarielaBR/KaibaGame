@@ -2,12 +2,9 @@ package ittepic.edu.mx.tpdm_kaiba;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
@@ -42,16 +39,17 @@ public class Conversacion extends AppCompatActivity{
 
         setContentView(R.layout.activity_conversacion);
 
-        idRem = "Bearnal";
+        usu = "Bearnal";
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
         enviar =(ImageView)findViewById(R.id.enviarMensaje);
         ref=true;
+        area.setMovementMethod(new ScrollingMovementMethod());
 
-        usu = getIntent().getStringExtra("usuario");
+        idRem = getIntent().getStringExtra("usuario");
 
         cargarMensajes();
-        //miThread();
+        miThread();
 
         enviar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -126,17 +124,6 @@ public class Conversacion extends AppCompatActivity{
             alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
         }
 
-    /*
-        String resp = con.conectarHTTP("http://diamondnutrition.co.nf/enviar_msj_paciente.php");
-
-        resp = resp.substring(resp.indexOf("-msj-")+5,resp.indexOf("-/msj-"));
-
-        Toast.makeText(this,resp,Toast.LENGTH_SHORT).show();
-
-        if(resp.equals("Mensaje enviado.")){
-            cargarMensajes();
-            return;
-        }*/
     }
 
     public void onDestroy() {
@@ -150,8 +137,7 @@ public class Conversacion extends AppCompatActivity{
 
         if(resultado.startsWith("Mensaje")){
             Toast.makeText(Conversacion.this,"Mensaje enviado",Toast.LENGTH_LONG).show();
-        }
-        if(resultado.startsWith("-msj")){
+        }else if(resultado.startsWith("-msj")){
             resultado = resultado.substring(resultado.indexOf("-msj-")+5,resultado.indexOf("-/msj-"));
             String[] vectorP = resultado.split("&&");
             area.setText("");
@@ -166,7 +152,9 @@ public class Conversacion extends AppCompatActivity{
             }
 
 
-        } else {
+        }else if (resultado.startsWith("/**/")){
+
+        }  else {
             if (resultado.startsWith("ERROR2")) {
                 resultado = "Error al enviar el codigo";
             }

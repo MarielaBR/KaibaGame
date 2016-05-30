@@ -13,6 +13,8 @@ import android.widget.ImageView;
 import android.database.Cursor;
 import android.view.WindowManager;
 import android.widget.Toast;
+import android.view.LayoutInflater;
+import android.widget.TextView;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -54,6 +56,16 @@ public class Seleccion extends AppCompatActivity {
                 t3.setImageResource(R.drawable.n3e);
 
                 p=1;
+
+                LayoutInflater inflater= LayoutInflater.from(Seleccion.this);
+                View view=inflater.inflate(R.layout.pette, null);
+
+                AlertDialog.Builder alertDialog = new AlertDialog.Builder(Seleccion.this);
+                alertDialog.setTitle("Pette");
+                alertDialog.setView(view);
+                alertDialog.setPositiveButton("Vale", null);
+                AlertDialog alert = alertDialog.create();
+                alert.show();
             }
         });
         p2.setOnClickListener(new View.OnClickListener() {
@@ -83,7 +95,7 @@ public class Seleccion extends AppCompatActivity {
 
                 ImageView image = new ImageView(Seleccion.this);
                 image.setImageResource(R.drawable.p1);
-
+            /*
                 AlertDialog.Builder builder = new AlertDialog.Builder(Seleccion.this).setTitle("Pette").
                         setMessage("Intrépido y temerario guerrero, lo cierto es que Pette sabe hacer hablar a sus armas.\n \n PV: 30 \n PM:4 \n PA:6").
                         setPositiveButton("Vale", new DialogInterface.OnClickListener() {
@@ -92,7 +104,7 @@ public class Seleccion extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                         }).setView(image);
-                builder.create().show();
+                builder.create().show();*/
                 p=3;
             }
         });

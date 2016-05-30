@@ -68,7 +68,7 @@ public class FragmentoPerfil extends Fragment{
 
             ConexionPerfil web = new ConexionPerfil(FragmentoPerfil.this);
             web.agregarVariables("usuario", usu);
-            web.execute(new URL("http://kaiba.esy.es/confirmacion.php"));
+            web.execute(new URL("http://kaiba.esy.es/perfil.php"));
         } catch (MalformedURLException e) {
             AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
             alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
@@ -116,8 +116,8 @@ public class FragmentoPerfil extends Fragment{
                         }
                     })
                     .show();
-        }else if(resultado.startsWith("ERROR")){
-            if(resultado.startsWith("ERROR2")){
+        }else if(resultado.startsWith("Error")){
+            if(resultado.startsWith("Error2")){
                 resultado="No se insertó el estado conectado";
             }
 
@@ -162,6 +162,7 @@ public class FragmentoPerfil extends Fragment{
                     imagen.setImageResource(R.drawable.b3);
                     break;
             }
+            usuario.setText(usu);
             puntos.setText(punt+" puntos");
             victorias.setText(vic+"");
             derrotas.setText(derr+"");

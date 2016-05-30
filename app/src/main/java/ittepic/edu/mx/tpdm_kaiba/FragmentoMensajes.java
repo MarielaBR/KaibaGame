@@ -7,11 +7,17 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
  * Created by MARIELA on 28/05/2016.
@@ -20,11 +26,18 @@ public class FragmentoMensajes extends Fragment{
     View root;
     ImageView ir;
     String usu;
+    TextView texto;
+
     ConexionBD base;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_mensajes, container, false);
 
         ir = (ImageView)root.findViewById(R.id.imageView25);
+
+        Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
+        texto=(TextView)root.findViewById(R.id.textView4);
+        texto.setTypeface(normal);
+
 
         base = new ConexionBD(getActivity(),"kaiba",null,1);
 
@@ -66,4 +79,49 @@ public class FragmentoMensajes extends Fragment{
                     }).show();
         }
     }
+
+    public void obtenerAmigos(){
+        try {
+
+            ConexionMensajes web = new ConexionMensajes(FragmentoMensajes.this);
+            web.agregarVariables("usuario", usu);
+            web.execute(new URL("http://kaiba.esy.es/amigosmensaje.php"));
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+        }
+    }
+
+    public void mostrarResultado(String resultado){
+        AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
+
+
+        if(resultado.startsWith("Error")){
+            if(resultado.startsWith("Error_404")){
+                resultado="Host inaccesible";
+            }
+
+            if(resultado.startsWith("Error_404_1")){
+                resultado="No existe el host";
+            }
+
+            if(resultado.startsWith("Error_404_1")){
+                resultado="Fallo flujo de datos";
+            }
+
+            alerta.setTitle("ERROR")
+                    .setMessage(resultado)
+                    .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            dialog.dismiss();
+                        }
+                    })
+                    .show();
+        }else{
+            String [] res=resultado.split(",");
+            Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

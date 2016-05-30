@@ -61,18 +61,9 @@ public class FragmentoPerfil extends Fragment{
         imagen=(ImageView)root.findViewById(R.id.imageView12);
 
         base= new ConexionBD(getActivity(),"kaiba",null,1);
-
         consultarusuario();
 
-        try {
-
-            ConexionPerfil web = new ConexionPerfil(FragmentoPerfil.this);
-            web.agregarVariables("usuario", usu);
-            web.execute(new URL("http://kaiba.esy.es/perfil.php"));
-        } catch (MalformedURLException e) {
-            AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
-            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
-        }
+        obtenerPerfil();
 
         return root;
 
@@ -99,6 +90,18 @@ public class FragmentoPerfil extends Fragment{
                             dialog.dismiss();
                         }
                     }).show();
+        }
+    }
+
+    public void obtenerPerfil(){
+        try {
+
+            ConexionPerfil web = new ConexionPerfil(FragmentoPerfil.this);
+            web.agregarVariables("usuario", usu);
+            web.execute(new URL("http://kaiba.esy.es/perfil.php"));
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
         }
     }
 

@@ -38,7 +38,6 @@ public class FragmentoMensajes extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_mensajes, container, false);
 
-        ir = (ImageView)root.findViewById(R.id.imageView25);
 
         Typeface normal = Typeface.createFromAsset(getActivity().getAssets(), "fonts/CaviarDreams.ttf");
         texto=(TextView)root.findViewById(R.id.textView4);

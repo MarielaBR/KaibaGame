@@ -20,5 +20,6 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Large Text"
         android:textColor="#FFFFFF"
-        android:id="@+id/textView" />
+        android:id="@+id/textView"
+        android:fontFamily="sans-serif"/>
 </LinearLayout>

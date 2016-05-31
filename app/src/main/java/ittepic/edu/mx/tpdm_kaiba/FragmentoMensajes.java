@@ -13,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,6 +28,8 @@ public class FragmentoMensajes extends Fragment{
     ImageView ir;
     String usu;
     TextView texto;
+    ListView lista;
+    ItemAdapter adaptador;
 
     ConexionBD base;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -38,6 +41,8 @@ public class FragmentoMensajes extends Fragment{
         texto=(TextView)root.findViewById(R.id.textView4);
         texto.setTypeface(normal);
 
+        lista=(ListView)root.findViewById(R.id.listView2);
+
 
         base = new ConexionBD(getActivity(),"kaiba",null,1);
 
@@ -46,11 +51,12 @@ public class FragmentoMensajes extends Fragment{
         ir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getActivity(), Conversacion.class );
+                Intent i = new Intent(getActivity(), Conversacion.class);
                 i.putExtra("usuario", usu);
                 startActivity(i);
             }
         });
+        obtenerAmigos();
 
         return root;
 
@@ -95,6 +101,7 @@ public class FragmentoMensajes extends Fragment{
     public void mostrarResultado(String resultado){
         AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
 
+        Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
 
         if(resultado.startsWith("Error")){
             if(resultado.startsWith("Error_404")){
@@ -119,7 +126,34 @@ public class FragmentoMensajes extends Fragment{
                     })
                     .show();
         }else{
-            String [] res=resultado.split(",");
+            String [] res=resultado.split("-");
+            Toast.makeText(getActivity(), res.length+"", Toast.LENGTH_SHORT).show();
+            String [] r;
+            /*String r[]=res[0].split(",");
+            Toast.makeText(getActivity(), res[0], Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), res[1], Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), r[0], Toast.LENGTH_SHORT).show();
+            Toast.makeText(getActivity(), r[1], Toast.LENGTH_SHORT).show();*/
+            String[] amigos=new String[res.length];
+            int[] personajes=new int[res.length];
+            for(int i=0;i<res.length-1;i++){
+                r=res[i].split(",");
+                amigos[i]=r[0];
+                switch(Integer.parseInt(r[1])){
+                    case 1:
+                        personajes[i]=R.drawable.i1;
+                        break;
+                    case 2:
+                        personajes[i]=R.drawable.i2;
+                        break;
+                    case 3:
+                        personajes[i]=R.drawable.i3;
+                        break;
+                }
+            }
+
+            adaptador=new ItemAdapter(getActivity(),amigos,personajes);
+            lista.setAdapter(adaptador);
             Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
         }
     }

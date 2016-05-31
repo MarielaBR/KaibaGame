@@ -106,8 +106,6 @@ public class FragmentoMensajes extends Fragment{
     public void mostrarResultado(String resultado){
         AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
 
-        Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
-
         if(resultado.startsWith("Error")){
             if(resultado.startsWith("Error_404")){
                 resultado="Host inaccesible";
@@ -132,7 +130,6 @@ public class FragmentoMensajes extends Fragment{
                     .show();
         }else{
             String [] res=resultado.split("-");
-            Toast.makeText(getActivity(), res.length+"", Toast.LENGTH_SHORT).show();
             String [] r;
             amigos=new String[res.length];
             personajes=new int[res.length];
@@ -154,7 +151,6 @@ public class FragmentoMensajes extends Fragment{
 
             adaptador=new ItemAdapter(getActivity(),amigos,personajes);
             lista.setAdapter(adaptador);
-            Toast.makeText(getActivity(), resultado, Toast.LENGTH_SHORT).show();
         }
     }
 

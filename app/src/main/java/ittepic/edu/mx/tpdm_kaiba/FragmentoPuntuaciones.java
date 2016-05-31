@@ -36,11 +36,11 @@ public class FragmentoPuntuaciones extends Fragment{
     String res;
     String[] titulo = new String[]{
             "Jugador        Nivel            Puntuación",
-            "   -  ",
-            "   -  ",
-            "   -  ",
-            "   -  ",
-            "   -  ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
+            "     ",
     };
 
 
@@ -96,10 +96,16 @@ public class FragmentoPuntuaciones extends Fragment{
 
         String relleno[]=new String[6];
         String arr[]=resultado.split(",");
+        String aux="";
+        String aux2[];
+        ;
+
 
         relleno[0]="Jugador        Nivel            Puntuación";
         for(int i=0;i<5;i++){
-            relleno[i+1]=arr[i];
+            aux2=arr[i].split("---");
+            aux=aux2[0]+"                 "+aux2[1]+"                "+aux2[2];
+            relleno[i+1]=aux;
         }
 
         adapter = new ListViewAdapter(getActivity(), relleno, imagenes);

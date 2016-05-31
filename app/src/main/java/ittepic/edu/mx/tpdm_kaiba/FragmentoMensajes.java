@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,6 +31,8 @@ public class FragmentoMensajes extends Fragment{
     TextView texto;
     ListView lista;
     ItemAdapter adaptador;
+    String[] amigos;
+    int[] personajes;
 
     ConexionBD base;
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
@@ -48,14 +51,17 @@ public class FragmentoMensajes extends Fragment{
 
         consultarusuario();
 
-        ir.setOnClickListener(new View.OnClickListener() {
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent i = new Intent(getActivity(), Conversacion.class);
                 i.putExtra("usuario", usu);
+                i.putExtra("destinatario",amigos[position]);
+
                 startActivity(i);
             }
         });
+
         obtenerAmigos();
 
         return root;
@@ -129,13 +135,8 @@ public class FragmentoMensajes extends Fragment{
             String [] res=resultado.split("-");
             Toast.makeText(getActivity(), res.length+"", Toast.LENGTH_SHORT).show();
             String [] r;
-            /*String r[]=res[0].split(",");
-            Toast.makeText(getActivity(), res[0], Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity(), res[1], Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity(), r[0], Toast.LENGTH_SHORT).show();
-            Toast.makeText(getActivity(), r[1], Toast.LENGTH_SHORT).show();*/
-            String[] amigos=new String[res.length];
-            int[] personajes=new int[res.length];
+            amigos=new String[res.length];
+            personajes=new int[res.length];
             for(int i=0;i<res.length-1;i++){
                 r=res[i].split(",");
                 amigos[i]=r[0];

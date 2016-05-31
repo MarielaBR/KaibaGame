@@ -13,13 +13,6 @@
         android:layout_gravity="center_horizontal"
         android:textColor="#FFFFFF" />
 
-    <ImageView
-        android:layout_width="223dp"
-        android:layout_height="49dp"
-        android:id="@+id/imageView25"
-        android:layout_gravity="center_horizontal"
-        android:src="@drawable/aceptar" />
-
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

@@ -5,10 +5,11 @@
     android:layout_height="match_parent">
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_height="60dp"
         android:id="@+id/imageView"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginBottom="7dp"
+        android:layout_marginLeft="20dp"
         android:src="@drawable/i2" />
 
     <TextView

@@ -32,8 +32,8 @@ public class FragmentoMensajes extends Fragment{
     ItemAdapter adaptador;
     String[] amigos;
     int[] personajes;
-
     ConexionBD base;
+
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_mensajes, container, false);
 

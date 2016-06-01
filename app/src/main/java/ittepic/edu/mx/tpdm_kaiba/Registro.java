@@ -140,7 +140,7 @@ public class Registro extends AppCompatActivity {
 
     public void mensajesSMS(){
         SmsManager enviarSMS = SmsManager.getDefault();
-        enviarSMS.sendTextMessage(telefonito, null, numero, null, null);
+        enviarSMS.sendTextMessage(telefonito, null, "Bienvenido a Kaiba, tu código de activación es: "+numero, null, null);
 
     }
 
@@ -156,6 +156,7 @@ public class Registro extends AppCompatActivity {
             i.putExtra("codigo", numero);
             i.putExtra("usuario", username);
             startActivity(i);
+            Registro.this.finish();
         }else{
             AlertDialog.Builder alerta= new AlertDialog.Builder(this);
 

@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
@@ -23,6 +24,7 @@ import java.net.URL;
  * Created by MARIELA on 28/05/2016.
  */
 public class FragmentoPartida extends Fragment{
+    RelativeLayout layout;
     View root;
     ImageView sig;
     ConexionBD base;
@@ -42,6 +44,9 @@ public class FragmentoPartida extends Fragment{
         sig.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                layout.setBackgroundResource(R.drawable.fondobu);
+                sig.setImageResource(R.drawable.btnbuju2);
                 consultar();
             }
         });

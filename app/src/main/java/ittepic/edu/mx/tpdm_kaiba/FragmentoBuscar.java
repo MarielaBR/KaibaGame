@@ -10,9 +10,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -46,7 +48,16 @@ public class FragmentoBuscar extends Fragment{
         buscar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                buscar(edittext.getText().toString());
+                if(!edittext.getText().toString().equals("")){
+                    buscar(edittext.getText().toString());
+                }
+            }
+        });
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                agregarAmigo(amigos[0]);
             }
         });
 
@@ -90,6 +101,19 @@ public class FragmentoBuscar extends Fragment{
         }
     }
 
+    public void agregarAmigo(String amigo){
+        try {
+            conexion=2;
+            ConexionBuscar web = new ConexionBuscar(FragmentoBuscar.this);
+            web.agregarVariables("usuario", usu);
+            web.agregarVariables("amigo",amigo);
+            web.execute(new URL("http://kaiba.esy.es/agregaramigo.php"));
+        } catch (MalformedURLException e) {
+            AlertDialog.Builder alerta = new AlertDialog.Builder(getActivity());
+            alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
+        }
+    }
+
     public void mostrarResultado(String resultado){
         if(conexion==1){
             AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
@@ -117,29 +141,64 @@ public class FragmentoBuscar extends Fragment{
                         })
                         .show();
             }else{
-                String [] res=resultado.split(",");
-                amigos=new String []{res[0]};
-                personajes=new int [1];
+                if(resultado.equals("")){
+                    amigos=new String []{"No existe"};
+                    personajes=new int []{R.drawable.vacio};
+                }else{
+                    String [] res=resultado.split(",");
+                    amigos=new String []{res[0]};
+                    personajes=new int [1];
 
-                switch(Integer.parseInt(res[1])) {
-                    case 1:
-                        personajes[0] = R.drawable.i1;
-                        break;
-                    case 2:
-                        personajes[0] = R.drawable.i2;
-                        break;
-                    case 3:
-                        personajes[0] = R.drawable.i3;
-                        break;
+                    switch(Integer.parseInt(res[1].trim())) {
+                        case 1:
+                            personajes[0] = R.drawable.i1;
+                            break;
+                        case 2:
+                            personajes[0] = R.drawable.i2;
+                            break;
+                        case 3:
+                            personajes[0] = R.drawable.i3;
+                            break;
+                    }
+
+                    adaptador=new ItemAdapter(getActivity(),amigos,personajes);
+                    lista.setAdapter(adaptador);
                 }
 
-                adaptador=new ItemAdapter(getActivity(),amigos,personajes);
-                lista.setAdapter(adaptador);
             }
         }
 
         if(conexion==2){
+            AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
 
+            if(resultado.startsWith("Error")){
+                if(resultado.startsWith("Error_404")){
+                    resultado="Host inaccesible";
+                }
+
+                if(resultado.startsWith("Error_404_1")){
+                    resultado="No existe el host";
+                }
+
+                if(resultado.startsWith("Error_404_1")){
+                    resultado="Fallo flujo de datos";
+                }
+
+                alerta.setTitle("ERROR")
+                        .setMessage(resultado)
+                        .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .show();
+            }else{
+                if(resultado.equals("EXITO")){
+                    Toast.makeText(getActivity(),"Se ha agregado a tu lista de amigos satisfactoriamente",Toast.LENGTH_SHORT).show();
+                }
+
+            }
         }
     }
 

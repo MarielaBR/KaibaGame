@@ -170,7 +170,7 @@ public class Conversacion extends AppCompatActivity{
             }
 
             alerta.setTitle("ERROR")
-                    .setMessage(resultado)q
+                    .setMessage(resultado)
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

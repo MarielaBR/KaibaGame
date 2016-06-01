@@ -91,7 +91,6 @@ public class Conversacion extends AppCompatActivity{
     private void cargarMensajes(){
 
         try {
-
             ConexionConversacion web = new ConexionConversacion(Conversacion.this);
             web.agregarVariables("USUARIO", usu);
             web.agregarVariables("DEST",dest);
@@ -103,7 +102,6 @@ public class Conversacion extends AppCompatActivity{
             AlertDialog.Builder alerta = new AlertDialog.Builder(Conversacion.this);
             alerta.setTitle("ERROR").setMessage(e.getMessage()).show();
         }
-
 
     }
 
@@ -164,7 +162,7 @@ public class Conversacion extends AppCompatActivity{
             }
 
             alerta.setTitle("ERROR")
-                    .setMessage(resultado)
+                    .setMessage(resultado)q
                     .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {

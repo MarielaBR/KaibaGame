@@ -23,13 +23,13 @@ import java.net.URL;
 public class Conversacion extends AppCompatActivity{
     EditText campo;
     TextView area;
-    String msj,rec,idRem;
+    String msj,rec;
     
     ImageView enviar;
     Thread t;
     boolean ref;
     final Handler handle = new Handler();
-    String usu;
+    String usu,dest;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,14 +39,15 @@ public class Conversacion extends AppCompatActivity{
 
         setContentView(R.layout.activity_conversacion);
 
-        usu = "Bearnal";
+
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
         enviar =(ImageView)findViewById(R.id.enviarMensaje);
         ref=true;
         area.setMovementMethod(new ScrollingMovementMethod());
 
-        idRem = getIntent().getStringExtra("usuario");
+        dest = getIntent().getStringExtra("destinatario");
+        usu = getIntent().getStringExtra("usuario");
 
         cargarMensajes();
         miThread();
@@ -93,8 +94,7 @@ public class Conversacion extends AppCompatActivity{
 
             ConexionConversacion web = new ConexionConversacion(Conversacion.this);
             web.agregarVariables("USUARIO", usu);
-            web.agregarVariables("DEST",idRem);
-            web.agregarVariables("usuario", idRem);
+            web.agregarVariables("DEST",dest);
 
             //change
             web.execute(new URL("http://kaiba.esy.es/cargarmensaje.php"));
@@ -111,8 +111,8 @@ public class Conversacion extends AppCompatActivity{
         try {
 
             ConexionConversacion web = new ConexionConversacion(Conversacion.this);
-            web.agregarVariables("usuario", usu);
-            web.agregarVariables("rem",idRem);
+            web.agregarVariables("usuario", dest);
+            web.agregarVariables("rem",usu);
             web.agregarVariables("mensaje", campo.getText().toString());
 
 

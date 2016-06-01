@@ -2,6 +2,7 @@ package ittepic.edu.mx.tpdm_kaiba;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -22,7 +23,7 @@ import java.net.URL;
  */
 public class Conversacion extends AppCompatActivity{
     EditText campo;
-    TextView area;
+    TextView area,titulo;
     String msj,rec;
     
     ImageView enviar;
@@ -43,11 +44,18 @@ public class Conversacion extends AppCompatActivity{
         area=(TextView)findViewById(R.id.TextView17);
         campo=(EditText)findViewById(R.id.editText8);
         enviar =(ImageView)findViewById(R.id.enviarMensaje);
+        titulo=(TextView)findViewById(R.id.textView6);
         ref=true;
         area.setMovementMethod(new ScrollingMovementMethod());
 
         dest = getIntent().getStringExtra("destinatario");
         usu = getIntent().getStringExtra("usuario");
+
+        Typeface normal = Typeface.createFromAsset(getAssets(), "fonts/CaviarDreams.ttf");
+        titulo.setTypeface(normal);
+        titulo.setText("Conversación con "+dest);
+
+
 
         cargarMensajes();
         miThread();

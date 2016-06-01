@@ -131,8 +131,8 @@ public class FragmentoMensajes extends Fragment{
         }else{
             String [] res=resultado.split("-");
             String [] r;
-            amigos=new String[res.length];
-            personajes=new int[res.length];
+            amigos=new String[res.length-1];
+            personajes=new int[res.length-1];
             for(int i=0;i<res.length-1;i++){
                 r=res[i].split(",");
                 amigos[i]=r[0];

@@ -3,6 +3,7 @@ package ittepic.edu.mx.tpdm_kaiba;
 import android.app.AlertDialog;
 import android.app.Fragment;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
@@ -10,6 +11,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import java.net.MalformedURLException;
@@ -22,15 +25,30 @@ public class FragmentoAmigos extends Fragment{
     View root;
     ConexionBD base;
     String usu;
+    ListView lista;
+    ItemAdapter adaptador;
+    String[] amigos;
+    int[] personajes;
 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState ) {
         root = inflater.inflate(R.layout.fragmento_amigos, container, false);
 
-
-
+        lista=(ListView)root.findViewById(R.id.listView3);
 
         base= new ConexionBD(getActivity(),"kaiba",null,1);
         consultarusuario();
+
+        lista.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent i = new Intent(getActivity(), Conversacion.class);
+                i.putExtra("usuario", usu);
+                i.putExtra("destinatario", amigos[position]);
+
+                startActivity(i);
+            }
+        });
+
         obtenerAmigos();
 
         return root;
@@ -73,11 +91,8 @@ public class FragmentoAmigos extends Fragment{
         }
     }
 
-
-
     public void mostrarResultado(String resultado){
         AlertDialog.Builder alerta= new AlertDialog.Builder(getActivity());
-
 
         if(resultado.startsWith("Error")){
             if(resultado.startsWith("Error_404")){
@@ -102,8 +117,28 @@ public class FragmentoAmigos extends Fragment{
                     })
                     .show();
         }else{
-            String [] res=resultado.split(",");
-            Toast.makeText(getActivity(),resultado,Toast.LENGTH_SHORT).show();
+            String [] res=resultado.split("-");
+            String [] r;
+            amigos=new String[res.length-1];
+            personajes=new int[res.length-1];
+            for(int i=0;i<res.length-1;i++){
+                r=res[i].split(",");
+                amigos[i]=r[0];
+                switch(Integer.parseInt(r[1])){
+                    case 1:
+                        personajes[i]=R.drawable.i1;
+                        break;
+                    case 2:
+                        personajes[i]=R.drawable.i2;
+                        break;
+                    case 3:
+                        personajes[i]=R.drawable.i3;
+                        break;
+                }
+            }
+
+            adaptador=new ItemAdapter(getActivity(),amigos,personajes);
+            lista.setAdapter(adaptador);
         }
     }
 

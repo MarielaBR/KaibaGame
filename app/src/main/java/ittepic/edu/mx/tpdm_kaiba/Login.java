@@ -155,6 +155,7 @@ public class Login extends AppCompatActivity {
             insertar(usu,cont);
             Intent i = new Intent(Login.this, MenuPrincipal.class );
             startActivity(i);
+            Login.this.finish();
         }
 
     }else{
